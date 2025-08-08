@@ -63,14 +63,14 @@ img {
       align-items: center;
       gap: 40px;
       color: rgba(255, 255, 255, 0.858);
-      font-size: 12px;
+      font-size: 17px;
     }
 
     .user-info img {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  margin-top: 8px;
+  margin-top: 9px;
   margin-left: 10px; /* Tambahkan ini untuk geser ke kanan */
 }
 .user-info {
@@ -97,7 +97,7 @@ img {
 .shortcut-menu {
   display: flex;
   justify-content: space-around; /* rata tengah antar item */
-  gap: 20px; /* jarak antar item */
+  gap: 100px; /* jarak antar item */
   flex-wrap: wrap; /* turun otomatis kalau layar sempit */
   padding: 0;
 }
@@ -112,8 +112,8 @@ img {
 }
 
 .shortcut-item img {
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
   margin-bottom: 4px;
 }
 
@@ -130,7 +130,7 @@ img {
 
     .shortcut-box {
       background: white;
-      padding: 12px 16px;
+      padding: 20px 16px;
       text-align: center;
       margin: 7px;
       text-align: center;
@@ -144,7 +144,7 @@ img {
       justify-content: space-between;
       font-weight: bold;
       margin-bottom: auto;
-      font-size: 12px;
+      font-size: 15px;
     }
 
     .shortcut-menu {
@@ -155,7 +155,7 @@ img {
     }
 
     .shortcut-menu div {
-      font-size: 12px;
+      font-size: 15px;
     }
 
     .point-box {
@@ -441,11 +441,10 @@ input[type="text"],
 input[type="number"],
 textarea,
 .fake-input {
-  width: 70%;
-  padding: 10px 15px;
+  padding: 10px 100px;
   border-radius: var(--radius);
   border: 1px solid #38b29b;
-  font-size: 10px;
+  font-size: 17px;
   background: var(--card);
   transition: border-color 0.3s ease;
 }
@@ -1036,7 +1035,7 @@ textarea {
     <span>E-Statement</span>
   </div>
   <div class="shortcut-item">
-<img src="wallet.png" alt="Top Up" style="filter: brightness(0) invert(1);">
+<img src="wallet.png" alt="Top Up" style="filter: brightness(0) invert(1); font-weight:600;">
     <span>Top Up</span>
   </div>
 </div>
@@ -1046,10 +1045,11 @@ textarea {
 
 
 <div class="features-box">
-    <div class="point-box" style="display: flex; border: 1px solid #ccc; border-radius: 10px; padding: 1px; margin: 0px auto; font-size: 10px; overflow: hidden;">
+
+    <div class="point-box" style="display: flex; border: 1px solid #ccc; border-radius: 10px; padding: 1px; margin: 0px auto; font-size: 15px; overflow: hidden;">
   <!-- Bagian kiri: Point Anda -->
-  <div style="flex: 1; display: flex; align-items: center; padding: -0px; gap: 5px;">
-    <img src="star-inside-circle.png" alt="Offline" style="width: 20px; height: 20px;">
+  <div style="flex: 2; display: flex; align-items: center; padding: 20px; gap: 5px;">
+    <img src="star-inside-circle.png" alt="Offline" style="width: 20px; border: 2px solid #6f0000; height: 20px;">
     <div>
       <b>Point anda</b><br>112
     </div>
@@ -1059,9 +1059,9 @@ textarea {
   <div style="width: 0px; background-color:rgb(0, 0, 0)c;"></div>
 
   <!-- Bagian kanan: Claim reward -->
-  <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px;">
-    Claim reward di sini →
-  </div>
+      <div style="flex: 1; background: #c60000; color: #fff; display: flex; align-items: center; justify-content: center; padding: 31px;">
+      Claim reward di sini →
+    </div>
 </div><br>
   <div class="features-grid">
     <div class="feature-item">
@@ -1096,6 +1096,7 @@ textarea {
       <img src="tv.png" alt="Lainnya">
       <span>Tv</span>
     </div>
+
   </div><br><br><br><br>
 </div>
 
