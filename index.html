@@ -710,7 +710,8 @@ textarea {
 <div class="user-info">
   <img src="cewek.jpeg" alt="User">
   <div class="user-name-section">
-    <div>Selamat Pagi,</div>
+<div id="ucapanWaktuDino" style="font-family: 5px; font-size: 15px;">Selamat datang!</div>
+
     <div style="font-weight:bold;">IZUNA WINATTA</div>
   </div>
 <div style="position: relative; display: inline-block;">
@@ -1693,6 +1694,35 @@ function setInitialWithIcon(idCircle, idName) {
 // Contoh panggilan:
 setInitialWithIcon('sumberrrrrrrrr', 'r_sumber');
 setInitialWithIcon('initialtujuannnnn', 'r_tujuan_nama');
+
+
+
+
+ function tampilkanUcapanWaktu() {
+    const jam = new Date().getHours();
+    let ucapan = "Selamat";
+
+    if (jam >= 4 && jam < 11) {
+      ucapan = "Selamat Pagi 🌅";
+    } else if (jam >= 11 && jam < 15) {
+      ucapan = "Selamat Siang 🌤";
+    } else if (jam >= 15 && jam < 18) {
+      ucapan = "Selamat Sore 🌇";
+    } else {
+      ucapan = "Selamat Malam 🌙";
+    }
+
+    const target = document.getElementById("ucapanWaktuDino");
+    if (target) {
+      target.innerText = ucapan;
+    } else {
+      console.warn("Elemen ucapan tidak ditemukan.");
+    }
+  }
+
+  // Jalankan saat halaman selesai dimuat
+  document.addEventListener("DOMContentLoaded", tampilkanUcapanWaktu);
+
 
 </script>
 
