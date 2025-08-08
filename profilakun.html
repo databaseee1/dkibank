@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Menu</title>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/your-kit.js" crossorigin="anonymous"></script>
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+    }
+    .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .profile-info {
+      margin-left: 12px;
+    }
+    .profile-info h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .profile-info .detail {
+      font-size: 14px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .verified {
+      background: #E0E0E0;
+      border-radius: 12px;
+      padding: 2px 6px;
+      font-size: 12px;
+      margin-left: 6px;
+    }
+    .edit {
+      margin-left: auto;
+      font-size: 20px;
+      color: #000;
+    }
+    .credits-card {
+      margin: 16px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .credits-card .value {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #7B3FF6;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .credits-card button {
+      background: #7B3FF6;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .menu {
+      margin-top: 16px;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .menu-item .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #333;
+      font-size: 16px;
+    }
+    .menu-item .right {
+      color: #ccc;
+      font-size: 16px;
+    }
+    .coin {
+      color: gold;
+      margin-left: 4px;
+      font-weight: bold;
+    }
+
+
+
+
+
+
+
+    
+.value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hexagon {
+  width: 40px;
+  height: 40px;
+  background: #a259ff; /* warna ungu */
+  clip-path: polygon(
+    50% 0%, 93% 25%,
+    93% 75%, 50% 100%,
+    7% 75%, 7% 25%
+  );
+  overflow: hidden;
+  background-color: #eee;
+  flex-shrink: 0;
+}
+
+.hexagon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.amount {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu-item .icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.menu-item .right .icon {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+
+
+ 
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+
+
+
+
+    
+  <div class="profile">
+    <img src="iz.jpg" alt="user" />
+    <div class="profile-info">
+      <h2>its me🌻</h2>
+      <div class="detail">
+        <i data-lucide="female"></i> ♀️23
+        <span>
+  <img src="Flag_of_Indonesia.svg.png" alt="ID" style="width:16px; height:auto; vertical-align:middle;">
+  Indonesia
+</span>
+        <span class="verified">Diverifikasi</span>
+      </div>
+    </div>
+    <div class="edit">
+      <i data-lucide="edit-3"></i>
+    </div>
+  </div>
+
+<div class="credits-card">
+  <div class="value">
+    <div class="hexagon">
+      <img src="coin.png" alt="Gambar">
+    </div>
+    <span class="amount">8127.1</span>
+  </div>
+  <button>Credits</button>
+</div>
+
+<div class="menu">
+  <div class="menu-item">
+    <div class="left">
+      <img src="coin.png" alt="clock" class="icon" />
+      Tokens saya
+    </div>
+    <div class="right">
+      <span class="coin">402</span>
+      <i data-lucide="chevron-right"></i>
+    </div>
+  </div>
+</div>
+
+    <div class="menu-item">
+      <div class="left">
+        <i data-lucide="message-square"></i> Setelan Obrolan
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="left">
+        <i data-lucide="shield"></i> Level Saya
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="left">
+        <i data-lucide="thumbs-up"></i> Rating saya
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="left">
+        <i data-lucide="crown"></i> PT AGENCY TIGOHOST
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="left">
+        <i data-lucide="gift"></i> Bonus Agency
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="left">
+        <i data-lucide="settings"></i> Setelan Aplikasi
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="left">
+        <i data-lucide="sewhost"></i> Setelan Host
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+
+   <div class="menu-item">
+      <div class="left">
+        <i data-lucide="sewhost"></i> Hasil Agency
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+
+
+
+       <div class="menu-item">
+      <div class="left">
+        <i data-lucide="sewhost"></i> Tigohost
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+
+
+
+
+       <div class="menu-item">
+      <div class="left">
+        <i data-lucide="sewhost"></i> Cs Agency
+      </div>
+      <div class="right">
+        <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

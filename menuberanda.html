@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Host Grid</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+/* ========== Status Bar iPhone Style ========== */
+
+.status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  background-color: white;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  border-bottom: 1px solid #ddd;
+  z-index: 9999;
+  box-sizing: border-box;
+}
+
+/* Posisi jam di kiri */
+.status-bar .left {
+  font-weight: 500;
+}
+
+/* Posisi sinyal/baterai di kanan */
+.status-bar .right {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+/* Sinyal iPhone Style */
+.iphone-signal {
+  display: flex;
+  align-items: flex-end;
+  height: 12px;
+  gap: 1px;
+}
+
+.iphone-signal span {
+  display: block;
+  width: 2px;
+  background-color: black;
+  border-radius: 1px;
+  opacity: 0.9;
+}
+.battery-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.green-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #34c759;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  right: -8px;
+}
+
+
+
+.iphone-signal span:nth-child(1) { height: 4px; }
+.iphone-signal span:nth-child(2) { height: 6px; }
+.iphone-signal span:nth-child(3) { height: 8px; }
+.iphone-signal span:nth-child(4) { height: 10px; }
+.iphone-signal span:nth-child(5) { height: 12px; }
+
+    
+    .iphone-navbar {
+      position: fixed;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 5px;
+      background-color: #aaa;
+      border-radius: 10px;
+      opacity: 0.9;
+      z-index: 50;
+      
+    }
+.iphone-navbar {
+  position: fixed;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 5px;
+  background-color: #aaa;
+  border-radius: 10px;
+  opacity: 0.9;
+  z-index: 9999;
+}
+
+
+
+
+
+
+
+    .user-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 12px;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .user-name {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .host-badge {
+      background: linear-gradient(145deg, #ff4d4f, #a8071a);
+      color: white;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 3px rgba(0,0,0,0.3);
+      font-weight: bold;
+      margin-left: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .host-badge img {
+      width: 10px;
+      height: 10px;
+    }
+
+
+
+
+
+
+
+  </style>
+</head>
+<body class="bg-gray-100 pt-10 pb-24">
+<!-- STATUS BAR (jika ingin tetap di atas layar) -->
+<!-- STATUS BAR (atas) -->
+<div class="fixed top-0 left-0 right-0 z-50 bg-white flex justify-between items-center px-4 py-1 text-[11px]">
+  <div class="status-bar flex items-center justify-between w-full px-2">
+    <div>10:03</div>
+    <div class="flex items-center gap-1">
+      <div class="flex items-end gap-[1px]">
+        <div class="w-[2px] h-[4px] bg-black rounded-sm"></div>
+        <div class="w-[2px] h-[6px] bg-black rounded-sm"></div>
+        <div class="w-[2px] h-[8px] bg-black rounded-sm"></div>
+        <div class="w-[2px] h-[10px] bg-black rounded-sm"></div>
+        <div class="w-[2px] h-[12px] bg-black rounded-sm"></div>
+      </div>
+      <div class="text-[9px] font-semibold">4G</div>
+      <div class="flex items-center gap-1">
+        <div class="w-4 h-2.5 border border-black rounded-sm relative flex items-center">
+          <div class="w-1/2 h-full bg-green-500"></div>
+          <div class="w-0.5 h-1.5 bg-black absolute -right-0.5 top-0.5 rounded-sm"></div>
+        </div>
+        <span class="text-[9px] font-semibold">51%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MENU BAR (di bawah status bar) -->
+<div class="fixed top-5 left-0 right-0 z-50 bg-white w-full flex justify-between items-center px-4 py-1 shadow">
+  <div class="text-base font-semibold">Orang <span class="text-gray-400 font-normal">Pesta</span></div>
+  <button><i data-lucide="menu" class="w-4 h-4"></i></button>
+</div>
+
+
+<!-- KONTEN BIASA DI BAWAHNYA -->
+<div class="mt-24 px-4">
+  <!-- Konten lainnya -->
+</div>
+
+<!-- NAVIGASI BAWAH -->
+<div class="iphone-navbar fixed bottom-0 left-0 right-0 z-50 bg-white border-t px-4 py-2 flex justify-around">
+  <!-- Isi ikon navigasi -->
+</div>
+
+
+
+</body>
+  <!-- Header -->
+
+
+<!-- Grid (hanya 1x) -->
+<div class="grid grid-cols-2 gap-4 px-4 mt-4">
+
+  <!-- CARD 1 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <!-- Gambar Host -->
+    <img src="cowok2.webp" class="w-full h-52 object-cover" />
+
+    <!-- Icon Pesan -->
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Nama, status, bendera -->
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Gilang
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok1.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Dika..
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.8 rounded ml-2"> Vip </span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+    <!-- CARD 3 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok3.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Natan
+          </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+      <!-- CARD 3 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok4.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Rendi
+  <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+
+      </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+      <!-- CARD 3 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok5.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        andi
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+       <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+      <!-- CARD 3 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok 5.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        User..
+          </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+      <!-- CARD 3 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowook 6.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        User9237jk
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+      <!-- CARD 3 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok7.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        AFandyjk
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+      <!-- CARD 3 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok8.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+        <!-- CARD 4 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok8.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+      <!-- CARD 5 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cewek.jpeg" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Calow tysjs
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+        <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+        <!-- CARD 6 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok8.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+        <!-- CARD 7 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok8.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+        <!-- CARD 8 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="cowok8.png" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+        <!-- CARD 9 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="md ripon.jpg" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+        <!-- CARD 10 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="nurman.jpg" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+          <!-- CARD 11 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="soegeng soemadi.jpg" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+          <!-- CARD 12 -->
+  <div class="relative rounded-xl overflow-hidden shadow bg-white">
+    <img src="shi caim.jpg" class="w-full h-52 object-cover" />
+    <div class="absolute bottom-2 right-2">
+      <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+          <circle cx="9" cy="11" r="1.5" fill="white"/>
+          <circle cx="12" cy="11" r="1.5" fill="white"/>
+          <circle cx="15" cy="11" r="1.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+      <div class="flex items-center text-sm font-semibold">
+        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+        Userfjhrb211
+        <span class="bg-red-500 text-white text-[10px] px-1 py-0.5 rounded ml-2">HOST</span>
+      </div>
+      <div class="flex items-center text-xs mt-1">
+<img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+Indonesia
+
+      </div>
+    </div>
+  </div>
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      VIP
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Dasno cr...
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+ 
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="rahmad.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Rahmad
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+
+  </div>
+
+  <!-- Gambar -->
+  <img src="wawan.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Wawan
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="arya setiwan.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Arya se...
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="babah yadi.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Babah Jyd
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      VIP
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="alan juno.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Alan Juno
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Dasno Crers
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Userfjhrb211
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Userfjhrb211
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Userfjhrb211
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Userfjhrb211
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Userfjhrb211
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+          <!-- CARD 13 -->
+<div class="relative rounded-xl overflow-hidden shadow bg-white">
+  <!-- Badge HOST menyatu -->
+  <div class="absolute top-2 right-2 z-10">
+    <span class="inline-flex items-center gap-1 bg-red-600/90 text-white text-[8px] px-1.5 py-[1px] rounded-md font-medium tracking-wide border border-red-700/60"
+      style="backdrop-filter: blur(1px);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[9px] h-[9px] fill-white" viewBox="0 0 24 24">
+        <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+      </svg>
+      HOST
+    </span>
+  </div>
+
+  <!-- Gambar -->
+  <img src="Dasno crers.jpg" class="w-full h-52 object-cover" />
+
+  <!-- Tombol chat -->
+  <div class="absolute bottom-2 right-2">
+    <div class="bg-white w-9 h-9 rounded-full flex items-center justify-center shadow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#9333EA" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 11.5C21 16.1944 16.9706 20 12 20C10.6459 20 9.36011 19.7378 8.2 19.2615L4 21L5.37949 17.1057C3.8983 15.5562 3 13.6122 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"/>
+        <circle cx="9" cy="11" r="1.5" fill="white"/>
+        <circle cx="12" cy="11" r="1.5" fill="white"/>
+        <circle cx="15" cy="11" r="1.5" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Info user -->
+  <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent text-white">
+    <div class="flex items-center text-sm font-semibold">
+      <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+      Userfjhrb211
+    </div>
+    <div class="flex items-center text-xs mt-1">
+      <img src="Flag_of_Indonesia.svg.png" class="w-4 h-4 rounded-full mr-1 border border-white" alt="ID"/>
+      Indonesia
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div> <!-- akhir html body -->
+
+
+
+
+
+
+<!-- Halaman Profil User (disembunyikan awalnya) -->
+
+<div id="userPage" class="hidden fixed inset-0 bg-white overflow-y-auto z-50 pb-24">
+  <!-- HEADER -->
+  <div class="px-4 pt-6 pb-2">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="https://via.placeholder.com/40x40.png?text=👧" class="w-12 h-12 rounded-full object-cover" />
+        <div>
+          <h1 class="font-bold text-[17px]">its me 🌻</h1>
+          <div class="flex items-center gap-1 text-[12px] text-[#888]">
+            <span class="text-pink-500 text-sm">♀️</span>
+            <span>23</span>
+            <span>🇮🇩 Indonesia</span>
+            <span class="bg-[#eeeeee] text-[11px] text-[#666] px-2 py-[2px] rounded-full flex items-center gap-1 ml-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+              Diverifikasi
+            </span>
+          </div>
+        </div>
+      </div>
+      <i data-lucide="edit-3" class="w-5 h-5"></i>
+    </div>
+  </div>
+
+  <!-- SALDO -->
+  <div class="mx-4 mt-4 bg-white shadow rounded-xl px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <div class="bg-[#eee] p-2 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+      </div>
+      <div class="text-purple-600 font-bold text-[18px]">817.1</div>
+    </div>
+    <button class="bg-purple-600 text-white text-xs font-semibold px-4 py-1.5 rounded-full">Credits</button>
+  </div>
+
+  <!-- MENU LIST -->
+  <div class="mt-6 space-y-5 px-4 text-[15px]">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="coins" class="w-5 h-5 text-gray-600"></i>
+        <span>Tokens saya</span>
+      </div>
+      <span class="text-xs text-orange-500 font-medium">0</span>
+    </div>
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="message-square" class="w-5 h-5 text-gray-600"></i>
+        <span>Setelan Obrolan</span>
+      </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="shield" class="w-5 h-5 text-gray-600"></i>
+        <span>Level Saya</span>
+      </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="thumbs-up" class="w-5 h-5 text-gray-600"></i>
+        <span>Rating saya</span>
+      </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="crown" class="w-5 h-5 text-gray-600"></i>
+        <span>Menjadi VIP</span>
+      </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="gift" class="w-5 h-5 text-gray-600"></i>
+        <span>Undang untuk mendapatkan uang</span>
+      </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="settings" class="w-5 h-5 text-gray-600"></i>
+        <span>Setelan Aplikasi</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bottom Navigation -->
+<div class="fixed bottom-4 left-0 right-0 bg-white py-2 px-8 border-t flex justify-between items-center text-[#DCDCDC] z-40">
+  <i data-lucide="play-circle" class="w-6 h-6 cursor-pointer"></i>
+  <i data-lucide="globe" class="w-6 h-6 cursor-pointer"></i>
+
+  <div class="relative">
+    <i data-lucide="message-circle" class="w-6 h-6 cursor-pointer"></i>
+    <span class="absolute -top-1 -right-2 text-xs bg-red-500 text-white px-1 rounded-full">97</span>
+  </div>
+
+  <i data-lucide="user" id="openUserPage" class="w-7 h-7 cursor-pointer"></i>
+
+</div>
+
+
+
+
+
+  <script>
+
+
+  const openUserBtn = document.getElementById("openUserPage");
+  const userPage = document.getElementById("userPage");
+
+  openUserBtn.addEventListener("click", () => {
+    userPage.classList.remove("hidden");
+  });
+
+
+
+    lucide.createIcons();
+  </script>
+
+</body>
+<div class="iphone-navbar"></div>
+</html>

@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JakOne Clone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #b11212;
+    }
+
+.header {
+  background-color: #a22026;
+  color: white;
+  padding: 10px;
+  padding-top: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: sticky;
+ 
+  top: 0;
+  z-index: 100;
+}
+
+.topbar {
+  
+  top: 0;
+  z-index: 1000;
+  background-color: #a22026;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 22px;
+  margin-left: -10px;
+}
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+}
+
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      color: rgba(255, 255, 255, 0.858);
+      font-size: 12px;
+    }
+
+    .user-info img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-top: 8px;
+  margin-left: 10px; /* Tambahkan ini untuk geser ke kanan */
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* dari 40px ke 16px */
+}
+
+    .balance-box {
+      background-color: #8d0000;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(238, 232, 232, 0.945);
+      font-size: 12px;
+      margin: 10px;
+      
+    }
+
+
+
+.shortcut-menu {
+  display: flex;
+  justify-content: space-around; /* rata tengah antar item */
+  gap: 20px; /* jarak antar item */
+  flex-wrap: wrap; /* turun otomatis kalau layar sempit */
+  padding: 0;
+}
+
+.shortcut-item {
+  display: flex;
+  flex-direction: column; /* gambar di atas, teks di bawah */
+  align-items: center; /* rata tengah horizontal */
+  justify-content: center; /* rata tengah vertikal */
+  flex: 0 0 60px; /* lebar box */
+  text-align: center;
+}
+
+.shortcut-item img {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+
+.shortcut-item span {
+  font-size: 9px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+
+
+
+
+    .shortcut-box {
+      background: white;
+      padding: 12px 16px;
+      text-align: center;
+      margin: 7px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      
+    }
+
+    .shortcut-title {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: auto;
+      font-size: 12px;
+    }
+
+    .shortcut-menu {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+      
+    }
+
+    .shortcut-menu div {
+      font-size: 12px;
+    }
+
+    .point-box {
+      background: #fff;
+      margin: 0 16px;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      gap: 10px;
+      margin: 5px;
+    }
+
+    .feature-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.feature-item:hover img {
+  transform: scale(1.1);
+}
+
+    .features-grid div {
+      font-size: 12px;
+    }
+
+    .navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 3px 0;
+  z-index: 99;
+  
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 11px;
+  color: #555;
+  flex: 1;
+  
+}
+
+.nav-item img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 0 auto 4px;
+  
+}
+
+
+/* Efek saat hover */
+.nav-item:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.nav-item:hover img {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.nav-item:hover span {
+  color: #ff4444; /* merah Bank DKI */
+}
+
+.gray-icon {
+  color: #b11212;
+}
+
+
+.qris-btn {
+  position: relative;
+  top: -5px;
+  background: #a40000;
+  border-radius: 50%;
+  padding: -1px; /* lebih tebal */
+  width: 40px;
+  height: 50px;
+  color: white;
+  font-size: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.qris-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+    .features-box {
+  background: white;
+  margin: 0px;
+  padding: 16px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 0;
+  text-align: center;
+}
+
+.feature-item img {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 6px;
+}
+
+.feature-item span {
+  font-size: 12px;
+  color: #333;
+  display: block;
+}
+
+
+.saldo-text {
+  display: inline-block;
+  margin-bottom: 9px; /* Atur sesuai kebutuhan, bisa 6px atau 8px */
+}
+
+.eye-icon {
+    filter: brightness(0) invert(1);
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#popupMutasi {
+  animation: fadeIn 0.2s ease-in-out;
+}
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+
+  :root{
+  --bg:#f3f4f6;
+  --card:#fff;
+  --primary:#5c0000;
+  --muted:#6b7280;
+  --success:#2e7d32;
+  --box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+  --radius:12px;
+  --glass: rgba(255,255,255,0.6);
+}
+
+
+  /* Pop-up Fullscreen */
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+  }
+  .popup-content {
+    background: white;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    border-radius: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from {transform: translateY(100%);}
+    to {transform: translateY(0);}
+  }
+
+
+
+.shortcut-item img {
+  height: 30px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  padding: 0px;
+  border-radius: 6px;
+}
+
+
+/* Modal full screen */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 51, 102, 0.7); /* overlay gelap biru */
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  width: 100%;
+  max-width: 760px;
+  height: 92vh;
+  background: var(--card);
+  border-radius: 20px 20px 0 0;
+  box-shadow: var(--box-shadow);
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #212529;
+}
+
+.modal header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modal h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #ffffff00;
+  font-weight: 700;
+}
+
+.close-btn {
+  background: var(--primary-light);
+  color: rgba(205, 205, 205, 0);
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #5c0000;
+}
+
+/* Form */
+.form-row {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+.fake-input {
+  width: 70%;
+  padding: 10px 15px;
+  border-radius: var(--radius);
+  border: 1px solid #38b29b;
+  font-size: 10px;
+  background: var(--card);
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+.fake-input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 6px var(--primary-light);
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.fake-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: var(--card);
+}
+
+.row-right {
+  text-align: right;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background:rgba(30, 1, 1, 0);
+}
+
+.btn-ghost {
+  background: #cccccc00;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
+
+.btn-ghost:hover {
+  background: rgb(216, 211, 211);
+  color: white; /* teks putih */
+  border-color: rgb(73, 46, 181);
+}
+
+/* Bank list modal inside modal */
+.picker {
+  display: none;
+  background: var(--card);
+  padding: 16px;
+  border-radius: var(--radius);
+  margin-top: 12px;
+  border: 1px solid #580303;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.search {
+  margin-bottom: 12px;
+}
+
+.bank-list {
+  max-height: 300px;
+  overflow: auto;
+  border-radius: var(--radius);
+  padding: 8px;
+  border: 1px solid #061959;
+}
+
+.bank-item {
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.bank-item:hover {
+  background: var(--primary-light);
+  border-color: rgb(15, 43, 156); 
+  color: white;
+}
+
+    /* receipt */
+.receipt {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+.receipt .head {
+  padding: 18px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.receipt .head img {
+  height: 20px;
+  display: block;
+  margin: 0 auto 6px;
+}
+
+.receipt h2 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--success);
+}
+
+.receipt p.subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.receipt .body {
+  padding: 18px;
+}
+
+.receipt .line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* biar teks atas-bawah sejajar */
+  padding: 8px 0;
+  border-bottom: 1px dashed #f1f1f1;
+  font-size: 14px;
+}
+
+.receipt .line .label {
+  flex: 1;
+  color: var(--muted);
+}
+
+.receipt .line .value {
+  flex: 1;
+  text-align: right;
+  font-weight: 500;
+  color: #333;
+}
+
+.receipt .small {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+    /* responsive */
+    @media (min-width:800px){.modal{height:80vh;border-radius:16px;padding:20px}}
+
+.initial-circle {
+  width: 32px;
+  height: 32px;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  user-select: none;
+  box-shadow: 0 2px 8px rgba(31,111,235,0.3);
+}
+
+#stepReceipt {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  display: none; /* awalnya hidden */
+  overflow-y: auto;
+}
+
+#stepReceipt > div {
+  background: var(--card, #fff);
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--box-shadow, 0 8px 24px rgba(0,0,0,0.1));
+}
+
+/* Pastikan .receipt ikut styling */
+.receipt {
+  position: relative; /* penting agar watermark absolute posisinya tepat */
+  min-height: 100px; /* cukup tinggi supaya muat 5 baris watermark */
+  margin-top: 100px;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+}
+
+.watermark {
+  position: absolute; /* posisinya di atas elemen lain */
+  top: 0%;
+  left: 0%;
+  width: 120%;
+  height: 100%;
+  pointer-events: none; /* supaya tidak mengganggu klik */
+  display: flex;
+  flex-wrap: wrap; /* biar bisa ke baris berikutnya */
+  align-content: flex-start;
+  overflow: hidden;
+  opacity: 0.1; /* transparansi watermark */
+  transform: rotate(-45deg); /* miring diagonal */
+  gap: 20px; /* jarak antar watermark */
+  padding: 40px;
+  z-index: 0; /* di belakang konten */
+}
+
+.watermark img {
+  width: calc((100% - 4 * 10px) / 5); /* 5 gambar per baris, dikurangi gap antar gambar */
+  height: auto;
+  user-select: none;
+  max-width: 110px; /* batasi max lebar supaya tidak terlalu besar */
+}
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+    
+  <div class="header">
+<div class="topbar">
+  <img src="jakonemobile.png" alt="Logo" class="logo">
+<img src="more.png" alt="Menu" class="menu-icon" style="filter: brightness(0) invert(1);">
+</div>
+</div>
+
+<div class="user-info">
+  <img src="cewek.jpeg" alt="User">
+  <div class="user-name-section">
+    <div>Selamat Pagi,</div>
+    <div style="font-weight:bold;">IZUNA WINATTA</div>
+  </div>
+<div style="position: relative; display: inline-block;">
+  <img src="bell.png" alt="Notifikasi" class="notif-icon" 
+    style="filter: brightness(0) invert(1); width: 20px; height: 20px; position: relative;">
+  
+  <span style="
+    position: absolute;
+    top: -2px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 10px;
+  ">+9</span>
+</div>
+</div>
+
+
+<div class="balance-box">
+  <div>
+    <div style="display: flex; align-items: center; gap: 6px;">
+  <span>Saldo Tabungan</span><br><br>
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</div>
+    <div>
+      <span class="saldo-text" data-saldo="Rp481.000.000">Rp481.000.000</span>
+      <img src="buka.png" class="eye-icon" onclick="toggleSaldo(this)">
+<div>
+  <span class="nomorRek">820****721</span>
+  <img src="copy.png" onclick="salinrek(this)" style="width:14px; vertical-align:middle; margin-left:4px; filter: brightness(0) invert(1); cursor:pointer;" alt="Salin">
+</div>
+    </div>
+  </div>
+  <div>
+    <div style="display: flex; align-items: center; gap: 6px;">
+  <span>JakOne Pay</span><br><br>
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</div>
+    <div>
+  <span class="saldo-text" data-saldo="Rp1.500.000">Rp•••••••</span>
+  <img src="buka.png" class="eye-icon" onclick="toggleSaldo(this)">
+  <br>
+  <span id="nomorWA">0852*****949</span>
+  <img src="copy.png" onclick="salinNomor()" style="width:14px; vertical-align:middle; margin-left:4px; filter: brightness(0) invert(1); cursor:pointer;" alt="Salin">
+</div>
+  </div>
+</div>
+
+
+  <div class="shortcut-box">
+    <div class="shortcut-title">
+      <span>Shortcut</span>
+      <span style="background:#a40000; font-size: 10px; color:white; padding:4px 10px; border-radius:5px;">Edit</span>
+
+    </div>
+    </div>
+    <div class="shortcut-menu">
+  <div class="shortcut-menu">
+
+
+
+  <div class="shortcut-item" id="openTransfer">
+    <img src="transfer.png" alt="Transfer">
+    <span style="font-weight:600">Transfer</span>
+  </div>
+
+  <!-- Modal overlay -->
+  <div class="overlay" id="overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+      <!-- Form Step -->
+      <div id="stepForm">
+        <header>
+          <h3 id="modalTitle">Menu Transfer</h3>
+          <div>
+            <button class="close-btn" id="closeModal">Tutup ✕</button>
+          </div>
+        </header>
+
+        <div style="flex:1; overflow:auto; padding-bottom:12px">
+          <!-- Nama Bank (picker) -->
+          <div class="form-row">
+            <label>Nama Bank / E-Wallet</label>
+            <div class="fake-input" id="bankPicker" tabindex="0">
+              <span id="bankLabel" style="color:#111">Pilih Bank atau E-Wallet</span>
+              <span style="
+  color: var(--muted);
+  font-size: 20px;     
+  line-height: 1;
+  user-select: none; 
+  display: flex;
+  align-items: center;      
+  justify-content: center; 
+  width: 30px; /* ukuran kotak untuk panah */
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+">▾</span>
+
+            </div>
+
+            <!-- picker panel -->
+            <div class="picker" id="pickerPanel">
+              <div style="display:flex;gap:8px;margin-bottom:8px">
+                <button class="btn btn-ghost" id="btnBank">BANK</button>
+                <button class="btn btn-ghost" id="btnEwallet">E-Wallet</button>
+              </div>
+
+              <div class="search">
+                <input type="text" id="searchBank" class="fake-input" placeholder="Cari nama bank / e-wallet..." style="padding:8px 10px">
+              </div>
+              <div class="bank-list" id="bankList">
+                <!-- bank items injected here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Nama Penerima -->
+          <div class="form-row">
+            <label>Nama Penerima</label>
+            <input type="text" id="namaPenerima" placeholder="">
+          </div>
+
+          <!-- Nomor Rekening -->
+          <div class="form-row">
+            <label>Nomor Rekening / ID E-Wallet</label>
+            <input type="text" id="nomorRek" placeholder="">
+          </div>
+
+          <!-- Nominal -->
+          <div class="form-row">
+            <label>Nominal (Rp)</label>
+            <input type="number" id="nominal" placeholder="">
+          </div>
+
+          <!-- Catatan -->
+          <div class="form-row">
+            <label>Catatan (opsional)</label>
+            <textarea id="catatan" placeholder=""></textarea>
+          </div>
+        </div>
+
+        <div style="padding-top:6px">
+          <button class="btn btn-primary" id="submitTransfer" style="width:100%">Lanjutkan Transfer</button>
+        </div>
+      </div>
+
+      <!-- Receipt Step (initially hidden) -->
+       
+      <div id="stepReceipt" style="display:none">
+        <header style="display:flex;align-items:center;justify-content:space-between">
+          <h3>Bukti Transaksi</h3>
+          <div>
+            <button class="close-btn" id="doneClose">Selesai</button>
+          </div>
+        </header>
+
+        <div style="flex:1; overflow:auto; padding-bottom:12px">
+          <div class="receipt" id="receiptTemplate" style="margin-top:12px">
+                  <!-- WATERMARK -->
+ <div class="watermark">
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+       <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+   <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+  <img src="bankjakarta.svg" alt="Watermark" />
+    <img src="bankjakarta.svg" alt="Watermark" />
+
+
+  
+
+</div>
+
+            <div class="head">
+              <img src="logobankdki.png" alt="Logo Bank" id="r_logo" onerror="this.style.display='none'">
+              <h2 id="r_status">Transaksi Berhasil</h2>
+              <p class="subtitle" id="r_datetime">24 Juli 2025, 23:30:17 WIB</p>
+            </div>
+            <div class="body">
+              <div class="line">
+                <span>Total Transaksi</span>
+                <span id="r_total" style="color:var(--success); font-weight:700">Rp 0</span>
+              </div>
+              <div class="line small">
+                <span>No. Ref</span>
+                <span id="r_ref">-</span>
+              </div>
+
+<div style="padding-top:8px; display:flex; flex-direction: column; gap:6px; align-items: flex-start;">
+  <div class="small">Sumber Dana</div>
+  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+<div class="initial-circle" id="sumberrrrrrrrr">
+  <img src="bank.png" alt="I" style="width:20px; filter: brightness(0) invert(1); height:20px; object-fit:contain;">
+</div>    
+<div style="font-weight:600;" id="r_sumber">IZUNA WINATTA</div>
+  </div>
+  <div class="small" id="r_sumber_acc">BANK - 7231****192</div>
+</div>
+
+<div style="padding-top:10px; display:flex; flex-direction: column; gap:6px; align-items: flex-start;">
+  <div class="small">Tujuan</div>
+  <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+<div class="initial-circle" id="initialtujuannnnn">
+  <img src="bank.png" alt="I" style="width:20px;filter: brightness(0) invert(1); height:20px; object-fit:contain;">
+</div>
+    <div style="font-weight:600;" id="r_tujuan_nama">IZUNA WINATTA</div>
+  </div>
+  <div class="small" id="r_tujuan_acc">BANK DKI - 820*****721</div>
+</div>
+
+
+
+              <div style="padding-top:10px">
+                <div class="line">
+                  <span>Nominal</span>
+                  <span id="r_nominal">Rp 0</span>
+                </div>
+                <div class="line">
+                  <span>Biaya Admin</span>
+                  <span id="r_fee">Rp 0</span>
+                </div>
+                <div class="line">
+                  <span>Catatan</span>
+                  <span id="r_note">-</span>
+                </div>
+              </div>
+
+              <div class="small" style="padding-top:12px;color:#9aa3ad">
+                INFORMASI:<br>
+          Biaya Termasuk PPN (Apabila Dikenakan/Apabila Ada)<br>
+          Gedung Bank DKI Juanda Lt 3 J. Ir. H. Juanda 3 No.7, RW.2, Kb. KIp., Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta
+10120<br>
+          NPWP : 01.000.515.5-073.000
+              </div>
+
+            </div>
+
+            <div style="padding:16px;display:flex;justify-content:space-between;gap:8px" class="no-print">
+              <button onclick="window.print()" class="btn btn-ghost">Cetak</button>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-ghost" id="shareeeBtn">Bagikan</button>
+                <button class="btn btn-primary" id="finishBtn">Selesai</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <div class="shortcut-item">
+    <img src="E-Statemet.png" alt="E-Statement" />
+    <span>E-Statement</span>
+  </div>
+  <div class="shortcut-item">
+<img src="wallet.png" alt="Top Up" style="filter: brightness(0) invert(1);">
+    <span>Top Up</span>
+  </div>
+</div>
+    </div><br>
+  
+
+
+
+<div class="features-box">
+    <div class="point-box" style="display: flex; border: 1px solid #ccc; border-radius: 10px; padding: 1px; margin: 0px auto; font-size: 10px; overflow: hidden;">
+  <!-- Bagian kiri: Point Anda -->
+  <div style="flex: 1; display: flex; align-items: center; padding: -0px; gap: 5px;">
+    <img src="star-inside-circle.png" alt="Offline" style="width: 20px; height: 20px;">
+    <div>
+      <b>Point anda</b><br>112
+    </div>
+  </div>
+
+  <!-- Garis pemisah -->
+  <div style="width: 0px; background-color:rgb(0, 0, 0)c;"></div>
+
+  <!-- Bagian kanan: Claim reward -->
+  <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px;">
+    Claim reward di sini →
+  </div>
+</div><br>
+  <div class="features-grid">
+    <div class="feature-item">
+      <img src="pasca.png" alt="Pulsa">
+      <span>Pulsa</span>
+    </div>
+    <div class="feature-item">
+      <img src="pasca2.png" alt="Pascabayar">
+      <span>Pascabayar</span>
+    </div>
+    <div class="feature-item">
+      <img src="paketdata.png" alt="Paket Data">
+      <span>Paket Data</span>
+    </div>
+    <div class="feature-item">
+      <img src="pln.png" alt="PLN">
+      <span>PLN</span>
+    </div>
+    <div class="feature-item">
+      <img src="pdam.png" alt="PDAM">
+      <span>PDAM</span>
+    </div>
+    <div class="feature-item">
+      <img src="tambahkartu.png" alt="E-Wallet">
+      <span>E-Wallet</span>
+    </div>
+    <div class="feature-item">
+      <img src="internet.png" alt="Internet">
+      <span>Internet</span>
+    </div>
+    <div class="feature-item">
+      <img src="tv.png" alt="Lainnya">
+      <span>Tv</span>
+    </div>
+  </div><br><br><br><br>
+</div>
+
+
+<div class="navbar">
+  <div class="nav-item active">
+    <img src="app.png" class="gray-icon" alt="Beranda">
+    <span>Beranda</span>
+  </div>
+
+
+
+
+  <div class="nav-item">
+    <img src="order-history.png" class="gray-icon" alt="Mutasi">
+    <span>Mutasi</span>
+  </div>
+
+
+<!-- Popup Mutasi BRImo Style -->
+<div id="popupMutasi" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#f4f4f4; color:#222; z-index:9999; overflow-y:auto; font-family:sans-serif;">
+  
+  <!-- Header judul mutasi -->
+  <div style="
+    background-color: #0068de; 
+    border-radius: 12px;
+    color: rgb(255, 255, 255); 
+    padding: 10px; 
+    padding-top: 60px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+    border-bottom: 1px solid #ccc;
+  ">
+    <!-- Tombol Kembali -->
+    <span onclick="tutupMutasi()" style="
+      position: absolute; 
+      left: 20px; 
+      font-size: 20px; 
+      cursor: pointer;
+      filter: brightness(0) saturate(100%) invert(13%) sepia(97%) saturate(0%) hue-rotate(350deg) brightness(0%) contrast(0%);
+    ">
+    </span>
+
+    <!-- Judul -->
+    <span style="font-size: 15px; font-weight: 600; text-align: center;">
+      Mutasi
+    </span>
+
+  </div>
+
+  <!-- Isi Mutasi -->
+<div id="daftarMutasi" 
+     style="padding:40px -2px; padding-top:10px; margin:0 5px; background:#fff;">    <!-- Item Mutasi -->
+    
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+<div style="
+    background: #f5f5f5; 
+    border-radius: 6px; 
+    padding: 6px 10px; 
+    display: inline-block; 
+    border: 1px solid #ddd;
+">
+  <p style="font-size: 12px; margin: 0;">08 Agustus 2025</p>
+</div>  
+<!-- Box untuk ikon filter -->
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 5px; display: inline-block; background: #fff;">
+  <img src="filter.png" alt="Filter" style="height:20px; width:auto; cursor:pointer;">
+</div>
+</div>
+
+<div style="
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 9px 10px;
+  margin-bottom: 14px;
+  font-family: 'Roboto', Arial, sans-serif;
+">
+  <!-- Bagian atas -->
+<div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
+  <div>
+<div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+  <img src="sukkses.png" alt="Icon" style="width:14px; height:14px; margin-right:5px;">
+  Transfer Masuk
+</div>    <div style="font-size:10px; color:gray;">17 Juli 2025, 13:45</div>
+    <div style="font-size:12px; color:rgb(73, 67, 67);"><strong> PT.AGENCY TIGOHOST ...</strong></div>
+  </div>
+  
+  <div style="text-align:right;">
+    <div style="font-weight:600; font-size: 12px; color:#2e7d32;">Rp 2.500.000</div>
+        <div style="font-size:10px; color:gray;">13:45 WIB</div>
+
+    <div style="
+      display:inline-block; 
+      background: #e6f4ea; 
+      color: #2e7d32; 
+      font-size:10px; 
+      font-weight:600; 
+      padding: 1px 8px; 
+      border-radius: 3px;
+      border: 1px solid #c8e6c9;
+      margin-top: 3px;
+      
+    ">
+      Berhasil
+    </div>
+  </div>
+</div>
+ </div>
+
+<div style="
+  background: #ffffff;
+  padding: 6px 10px;
+  margin-top: -13px;
+  margin-bottom: 14px;
+  font-family: 'Roboto', Arial, sans-serif;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+">
+  <!-- Bagian atas -->
+  <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
+    <div>
+      <div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+        <img src="sukkses.png" alt="Icon" style="width:14px; height:14px; margin-right:5px;">
+        Transfer Berhasil
+      </div>    
+      <div style="font-size:10px; color:gray;">17 Juli 2025, 13:45</div>
+      <div style="font-size:12px; color:rgb(73, 67, 67);"><strong>PT.AGENCY TIGOHOST ...</strong></div>
+    </div>
+    
+   <div style="text-align:right;">
+    <div style="font-weight:600; font-size: 12px; color:#2e7d32;">Rp 2.500.000</div>
+        <div style="font-size:10px; color:gray;">13:45 WIB</div>
+
+    <div style="
+      display:inline-block; 
+      background: #e6f4ea; 
+      color: #2e7d32; 
+      font-size:10px; 
+      font-weight:600; 
+      padding: 1px 8px; 
+      border-radius: 3px;
+      border: 1px solid #c8e6c9;
+      margin-top: 3px;
+      
+    ">
+      Berhasil
+    </div>
+    </div>
+  </div>
+</div>
+
+<div style="
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 6px 10px; /* dikurangi padding atas dari 9px jadi 6px */
+  margin-top: -13px;  /* geser box ke atas */
+  margin-bottom: 14px;
+  font-family: 'Roboto', Arial, sans-serif;
+">
+  <!-- Bagian atas -->
+  <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
+    <div>
+      <div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+        <img src="gagall.png" alt="Icon" style="width:14px; height:14px; margin-right:5px;">
+        Transfer Gagal
+      </div>    
+      <div style="font-size:10px; color:gray;">17 Juli 2025, 13:45</div>
+      <div style="font-size:12px; color:rgb(73, 67, 67);"><strong>KIYA SYITA DIYAH</strong></div>
+    </div>
+    
+    <div style="text-align:right;">
+      <div style="font-weight:600; font-size: 12px; color:#ff0000;">-Rp 100.000</div>
+      <div style="font-size:10px; color:gray;">13:45 WIB</div>
+      <div style="
+        display:inline-block; 
+        background: #b65252; 
+        color: #ffffff; 
+        font-size:10px; 
+        font-weight:600; 
+        padding: 1px 8px; 
+        border-radius: 3px;
+        border: 1px solid #c8e6c9;
+        margin-top: 3px;
+      ">
+        Gagal
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div style="
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 6px 10px; /* dikurangi padding atas dari 9px jadi 6px */
+  margin-top: -13px;  /* geser box ke atas */
+  margin-bottom: 14px;
+  font-family: 'Roboto', Arial, sans-serif;
+">
+  <!-- Bagian atas -->
+  <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
+    <div>
+      <div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+        <img src="sukkses.png" alt="Icon" style="width:14px; height:14px; margin-right:5px;">
+        Transfer Berhasil
+      </div>    
+      <div style="font-size:10px; color:gray;">17 Juli 2025, 13:45</div>
+      <div style="font-size:12px; color:rgb(73, 67, 67);"><strong>PT.AGENCY TIGOHOST ...</strong></div>
+    </div>
+    
+   <div style="text-align:right;">
+    <div style="font-weight:600; font-size: 12px; color:#2e7d32;">Rp 2.500.000</div>
+        <div style="font-size:10px; color:gray;">13:45 WIB</div>
+
+    <div style="
+      display:inline-block; 
+      background: #e6f4ea; 
+      color: #2e7d32; 
+      font-size:10px; 
+      font-weight:600; 
+      padding: 1px 8px; 
+      border-radius: 3px;
+      border: 1px solid #c8e6c9;
+      margin-top: 3px;
+      
+    ">
+      Berhasil
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+  <div class="nav-item qris-btn">
+    <img src="qrssss-removebg-preview.png" alt="QRIS" 
+style="filter: brightness(0) invert(1); width: 25px; height: 25px;">
+  </div>
+  <div class="nav-item">
+    <img src="heart.png" class="gray-icon" alt="Favorit">
+    <span>Favorit</span>
+  </div>
+  <div class="nav-item">
+    <img src="account.png" class="gray-icon" alt="Akun">
+    <span>Akun</span>
+  </div>
+</div>
+
+
+<script>
+  function toggleSaldo(icon) {
+    const saldoSpan = icon.previousElementSibling;
+    const isHidden = saldoSpan.textContent.includes("•");
+
+    if (isHidden) {
+      saldoSpan.textContent = saldoSpan.dataset.saldo;
+      icon.src = "buka.png"; // ganti jadi ikon mata terbuka
+    } else {
+      saldoSpan.textContent = "Rp•••••••";
+      icon.src = "tutup.png"; // ganti jadi ikon mata tertutup
+    }
+  }
+
+
+
+// SALIN NOMOR
+   function salinNomor() {
+    const nomor = document.getElementById("nomorWA").innerText;
+    navigator.clipboard.writeText(nomor).then(function() {
+      alert("Nomor disalin: " + nomor);
+    }, function(err) {
+      alert("Gagal menyalin");
+    });
+  }
+
+    function salinrek(el) {
+    const nomorRek = el.previousElementSibling.innerText;
+    navigator.clipboard.writeText(nomorRek).then(function () {
+      alert("Nomor disalin: " + nomorRek);
+    }, function () {
+      alert("Gagal menyalin");
+    });
+  }
+
+
+
+
+
+
+
+
+  document.querySelector('.nav-item img[alt="Mutasi"]').addEventListener('click', function() {
+    document.getElementById('popupMutasi').style.display = 'block';
+  });
+
+  function tutupMutasi() {
+    document.getElementById('popupMutasi').style.display = 'none';
+  }
+
+
+
+
+
+
+function bukaFilter() {
+  // Cek kalau popup filter belum ada, buat secara dinamis
+  let popup = document.getElementById("popupFilter");
+  if (!popup) {
+    popup = document.createElement("div");
+    popup.id = "popupFilter";
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+    popup.style.background = "#fff";
+    popup.style.padding = "20px";
+    popup.style.borderRadius = "10px";
+    popup.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
+    popup.style.zIndex = "9999";
+
+    popup.innerHTML = `
+      <h3 style="margin-top:0;">Filter</h3>
+      <label>
+        <input type="checkbox" name="verified"> Diverifikasi
+      </label><br>
+      <label>
+        <input type="checkbox" name="online"> Sedang Online
+      </label><br><br>
+      <button onclick="tutupFilter()" style="background:red;color:#fff;border:none;padding:8px 14px;border-radius:5px;cursor:pointer;">Tutup</button>
+    `;
+
+    document.body.appendChild(popup);
+  } else {
+    popup.style.display = "block";
+  }
+}
+
+function tutupFilter() {
+  const popup = document.getElementById("popupFilter");
+  if (popup) popup.style.display = "none";
+}
+
+
+
+
+
+
+  function openPopup() {
+    document.getElementById('popupTransfer').style.display = 'flex';
+  }
+  function closePopup(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+  function pilihKategori() {
+    document.getElementById('popupKategori').style.display = 'flex';
+  }
+  function tampilkanBank() {
+    closePopup('popupKategori');
+    document.getElementById('popupBank').style.display = 'flex';
+  }
+  function tampilkanEwallet() {
+    closePopup('popupKategori');
+    document.getElementById('popupEwallet').style.display = 'flex';
+  }
+  function setBank(nama) {
+    document.getElementById('namaBank').value = nama;
+    closePopup('popupBank');
+    closePopup('popupEwallet');
+  }
+
+
+  const BANKS = [
+    "BANK BRI","BANK MANDIRI","PERMATA BANK","CIMB Niaga Syariah","BII Syariah","OCBC NISP Syariah","Bank Permata Syariah",
+    "Bank pembangunan daerah","Bank Nagari Syariah","Bank BPD Aceh Syariah","Bank DKI Syariah",
+    "Bank Kalbar Syariah","Bank Kalsel Syariah","Bank NTB Syariah","Bank Riau Kepri Syariah",
+    "Bank Sumsel Babel Syariah","Bank Sumut Syariah","Bank Kaltim Syariah","Bank Arta Niaga Kencana",
+    "Artamedia Bank","Bank Asia Pacific","Bank Asiatic","Bank Bahari","Bank Barclays Indonesia",
+    "Bank Dagang Bali","Bank Dai-Ichi Kangyo Indonesia","Bank Danpac","Bank Dharmala","Bank Duta",
+    "Bank Ekspor Indonesia","Bank Ficorinvest","Bank Global International","Bank Haga","Bank Harapan Sentosa",
+    "Bank Hastin","Bank IBJ Indonesia","Bank IFI","Bank Indonesia Raya","ING Indonesia Bank",
+    "Bank Intan","Jayabank International","Keppel Tat Lee Buana Bank","Lippo Bank","Bank Mashill",
+    "Bank Merincorp","Bank Metropolitan","Bank Modern","Bank Nusa Nasional","Bank OCBC Indonesia",
+    "Bank Paribas-BBD Indonesia","Bank Patriot","Bank Pelita","Bank Pikko","Bank Pos Nusantara",
+    "Bank Prasidha Utama","Prima Express Bank","Bank Putera Multikarsa","Bank Rama","Bank Ratu",
+    "Bank Risjad Salim Internasional","Bank Sakura Swadharma","Bank Societe Generale Indonesia",
+    "Bank Summa","Bank Surya","Bank Tamara","Bank Tata","Bank Tiara","Tokai Lippo Bank",
+    "Bank UFJ Indonesia","Bank UOB Indonesia","Bank Umum Nasional","Bank Umum Servitia","Bank Unibank",
+    "Bank Universal","Bank Windu Kentjana","Bank Sentral Republik Indonesia"
+    // (tambahkan sisanya jika perlu)
+  ];
+
+  const EWALLETS = ["OVO","Dana","ShopeePay","GoPay","LinkAja","Jenius Pay","Other E-Wallet"];
+
+  /* --- elements --- */
+  const overlay = document.getElementById('overlay');
+  const openTransfer = document.getElementById('openTransfer');
+  const closeModal = document.getElementById('closeModal');
+  const btnBank = document.getElementById('btnBank');
+  const btnEwallet = document.getElementById('btnEwallet');
+  const bankList = document.getElementById('bankList');
+  const pickerPanel = document.getElementById('pickerPanel');
+  const bankPicker = document.getElementById('bankPicker');
+  const bankLabel = document.getElementById('bankLabel');
+  const searchBank = document.getElementById('searchBank');
+  const submitTransfer = document.getElementById('submitTransfer');
+
+  const stepForm = document.getElementById('stepForm');
+  const stepReceipt = document.getElementById('stepReceipt');
+
+  /* receipt elements */
+  const r_datetime = document.getElementById('r_datetime');
+  const r_total = document.getElementById('r_total');
+  const r_ref = document.getElementById('r_ref');
+  const r_sumber = document.getElementById('r_sumber');
+  const r_sumber_acc = document.getElementById('r_sumber_acc');
+  const r_tujuan_nama = document.getElementById('r_tujuan_nama');
+  const r_tujuan_acc = document.getElementById('r_tujuan_acc');
+  const r_nominal = document.getElementById('r_nominal');
+  const r_fee = document.getElementById('r_fee');
+  const r_note = document.getElementById('r_note');
+
+  /* inputs */
+  const namaPenerima = document.getElementById('namaPenerima');
+  const nomorRek = document.getElementById('nomorRek');
+  const nominal = document.getElementById('nominal');
+  const catatan = document.getElementById('catatan');
+
+  /* state */
+  let chosenCategory = null; // 'BANK' or 'E-WALLET'
+  let chosenBank = null;
+
+  /* open modal */
+  openTransfer.addEventListener('click', ()=> {
+    overlay.style.display = 'flex';
+    // default to bank list initially hidden
+    pickerPanel.style.display = 'none';
+    stepForm.style.display = 'block';
+    stepReceipt.style.display = 'none';
+    // reset
+    bankLabel.textContent = 'Pilih Bank atau E-Wallet';
+    chosenCategory = null;
+    chosenBank = null;
+    bankList.innerHTML = '';
+  });
+
+  closeModal.addEventListener('click', ()=> overlay.style.display='none');
+
+  // open picker when clicking the fake input
+  bankPicker.addEventListener('click', ()=> {
+    pickerPanel.style.display = pickerPanel.style.display === 'block' ? 'none' : 'block';
+    searchBank.value = '';
+    renderBankList([]);
+  });
+
+  // choose category
+  btnBank.addEventListener('click', ()=> {
+    chosenCategory = 'BANK';
+    renderBankList(BANKS);
+  });
+  btnEwallet.addEventListener('click', ()=> {
+    chosenCategory = 'E-WALLET';
+    renderBankList(EWALLETS);
+  });
+
+  // search
+  searchBank.addEventListener('input', (e)=>{
+    const q = e.target.value.trim().toLowerCase();
+    if(!chosenCategory) return;
+    const source = chosenCategory === 'BANK' ? BANKS : EWALLETS;
+    const filtered = source.filter(x => x.toLowerCase().includes(q));
+    renderBankList(filtered);
+  });
+
+  function renderBankList(list){
+    bankList.innerHTML = '';
+    // if list empty show hint
+    if(list.length === 0){
+      bankList.innerHTML = '<div style="color:var(--muted);padding:8px">Pilih kategori (BANK / E-Wallet)</div>';
+      return;
+    }
+    list.forEach(name=>{
+      const btn = document.createElement('div');
+      btn.className = 'bank-item';
+      btn.innerHTML = `<div style="font-weight:600">${name}</div><div style="font-size:12px;color:var(--muted)">Klik untuk pilih</div>`;
+      btn.addEventListener('click', ()=> {
+        chosenBank = name;
+        bankLabel.textContent = name;
+        pickerPanel.style.display = 'none';
+      });
+      bankList.appendChild(btn);
+    });
+  }
+
+  /* submit (Lanjutkan Transfer) */
+  submitTransfer.addEventListener('click', (e)=>{
+    // minimal validation
+    const nama = namaPenerima.value.trim();
+    const no = nomorRek.value.trim();
+    const nom = parseFloat(nominal.value);
+    if(!chosenBank){
+      alert('Pilih Bank / E-Wallet terlebih dahulu.');
+      return;
+    }
+    if(!nama){ alert('Masukkan nama penerima.'); return; }
+    if(!no){ alert('Masukkan nomor rekening / ID e-wallet.'); return; }
+    if(!nom || nom <= 0){ alert('Masukkan nominal yang valid.'); return; }
+
+    // generate receipt data
+    const now = new Date();
+    const dtString = now.toLocaleString('id-ID', {dateStyle:'medium', timeStyle:'medium'});
+    const ref = 'REF' + Math.floor(100000 + Math.random()*899999);
+    const fee = 0; // contoh: bisa di-calc atau di-set
+    const total = nom; // include fee if any
+
+    // fill template
+    r_datetime.textContent = dtString + ' WIB';
+    r_total.textContent = formatRupiah(total);
+    r_ref.textContent = '#' + ref;
+    r_sumber.textContent = 'IZUNA WINATTA';
+    r_sumber_acc.textContent = 'BANK DKI - 3544****625'; // contoh sumber
+    r_tujuan_nama.textContent = nama;
+    r_tujuan_acc.textContent = chosenBank + ' - ' + maskAccount(no);
+    r_nominal.textContent = formatRupiah(nom);
+    r_fee.textContent = 'Rp 0';
+    r_note.textContent = catatan.value.trim() ? catatan.value.trim() : '---';
+
+    // show receipt, hide form
+    stepForm.style.display = 'none';
+    stepReceipt.style.display = 'block';
+
+    // optional: scroll to top of modal
+    document.querySelector('.modal').scrollTop = 0;
+  });
+
+  // finish / close handlers
+  document.getElementById('finishBtn').addEventListener('click', ()=> overlay.style.display='none');
+  document.getElementById('doneClose').addEventListener('click', ()=> overlay.style.display='none');
+
+  // share button (simple copy to clipboard)
+  document.getElementById('shareBtn').addEventListener('click', ()=>{
+    const txt = `Bukti Transfer\nRef: ${r_ref.textContent}\nTotal: ${r_total.textContent}\nKe: ${r_tujuan_nama.textContent} (${r_tujuan_acc.textContent})\nNomor: ${r_nominal.textContent}`;
+    navigator.clipboard?.writeText(txt).then(()=> alert('Bukti singkat disalin ke clipboard.'))
+  });
+
+  // helpers
+  function formatRupiah(num){
+    return 'Rp ' + Number(num).toLocaleString('id-ID');
+  }
+  function maskAccount(acc){
+    const s = String(acc);
+    if(s.length <= 6) return s;
+    const left = s.slice(0,3);
+    const right = s.slice(-3);
+    return left + '****' + right;
+  }
+
+  // close overlay when clicking outside modal (optional)
+  overlay.addEventListener('click', (e)=>{
+    if(e.target === overlay) overlay.style.display='none';
+  });
+
+  // accessibility: ESC to close
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') overlay.style.display='none' });
+
+
+
+
+function setInitialWithIcon(idCircle, idName) {
+  const nameEl = document.getElementById(idName);
+  const circleEl = document.getElementById(idCircle);
+  if (nameEl && circleEl) {
+    const firstChar = nameEl.textContent.trim().charAt(0).toUpperCase();
+    // Ganti isi div dengan gambar sesuai inisial
+    circleEl.innerHTML = `<img src="icon-${firstChar.toLowerCase()}.png" alt="${firstChar}" style="width:24px; height:24px; object-fit:contain;">`;
+  }
+}
+
+// Contoh panggilan:
+setInitialWithIcon('sumberrrrrrrrr', 'r_sumber');
+setInitialWithIcon('initialtujuannnnn', 'r_tujuan_nama');
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

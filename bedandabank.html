@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beranda BANK DKI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* Header */
+    .header {
+      background: #b40222;
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header img {
+      height: 24px;
+    }
+
+    .header .notif {
+      font-size: 20px;
+    }
+
+    /* Saldo */
+    .saldo-box {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .saldo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .saldo-header h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .toggle-eye {
+      cursor: pointer;
+      font-size: 20px;
+      color: #333;
+    }
+
+.toggle-eye img {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.saldo-nominal {
+  display: flex;           /* Bikin isinya sejajar (inline) */
+  align-items: center;     /* Vertikal rata tengah */
+  font-size: 1.5em;
+  font-weight: bold;
+  gap: 8px;                /* Jarak antara nominal dan ikon mata */
+}
+
+    .waktu {
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* Menu */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 0 12px;
+      margin-top: 12px;
+    }
+
+    .menu-item {
+      background: rgb(81, 124, 232);
+      border-radius: 12px;
+      text-align: center;
+      padding: 12px 6px;
+      font-size: 14px;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .menu-item img {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 6px;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+
+    .bottom-nav div {
+      text-align: center;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .bottom-nav img {
+      width: 24px;
+      height: 24px;
+      display: block;
+      margin: 0 auto 4px;
+    }
+
+    /* Responsif */
+    @media (max-width: 500px) {
+      .saldo-box p {
+        font-size: 20px;
+      }
+    }
+
+
+    .horizontal-banner {
+      display: flex;
+      overflow-x: auto;
+      padding: 16px 8px;
+      gap: 16px;
+      background-color: #fff;
+    }
+
+    .banner-card {
+      flex: 0 0 auto;
+      width: 320px;
+      background: #b40222;
+      color: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .banner-card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .banner-card p {
+      font-size: 14px;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .banner-card button {
+      background: white;
+      color: #b40222;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .banner-card button:hover {
+      background: #eee;
+    }
+
+    /* Scrollbar tersembunyi */
+    .horizontal-banner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .horizontal-banner {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+
+
+    .section {
+      margin: 10px;
+    }
+
+    .info-bar {
+      background: #007bff;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .search-box {
+      background: white;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .search-box input {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .protection-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .protection-box span {
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    .protection-box button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 12px;
+      border-radius: 16px;
+    }
+
+    .deals {
+      background: white;
+      margin-top: 16px;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .deals-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .voucher {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .voucher img {
+      width: 50px;
+      height: 50px;
+      margin-right: 12px;
+    }
+
+    .voucher-info {
+      flex: 1;
+    }
+
+    .voucher-info h4 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .voucher-info p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .voucher-price {
+      text-align: right;
+      font-size: 14px;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    .terbaru {
+      background: white;
+      margin-top: 16px;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .terbaru-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .terbaru-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .terbaru-item img {
+      width: 30px;
+      height: 30px;
+      margin-right: 12px;
+    }
+
+    .terbaru-item div {
+      font-size: 14px;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 11px;
+      color: #888;
+      padding: 20px;
+    }
+
+
+.notif {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-putih {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) invert(1); /* Jadikan gambar putih */
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 12px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+    .transaction-box {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .transaction-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .transaction-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+    }
+
+    .transaction-option span {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Popup */
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background-color: #ffffff;
+      width: 90%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      position: relative;
+    }
+
+    .popup-content h2 {
+      margin-top: 0;
+      color: #d1112e;
+    }
+
+    .popup-content p {
+      font-size: 18px;
+      color: #444;
+      margin: 10px 0;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 10px; right: 10px;
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+    }
+
+/* ========== Status Bar iPhone Style ========== */
+
+.status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  background-color: white;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  border-bottom: 1px solid #ddd;
+  z-index: 9999;
+  box-sizing: border-box;
+}
+
+/* Posisi jam di kiri */
+.status-bar .left {
+  font-weight: 500;
+}
+
+/* Posisi sinyal/baterai di kanan */
+.status-bar .right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Sinyal iPhone Style */
+.iphone-signal {
+  display: flex;
+  align-items: flex-end;
+  height: 12px;
+  gap: 1.5px;
+}
+
+.iphone-signal span {
+  display: block;
+  width: 2px;
+  background-color: black;
+  border-radius: 1px;
+  opacity: 0.9;
+}
+.battery-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.green-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #34c759;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  right: -8px;
+}
+
+
+
+.iphone-signal span:nth-child(1) { height: 4px; }
+.iphone-signal span:nth-child(2) { height: 6px; }
+.iphone-signal span:nth-child(3) { height: 8px; }
+.iphone-signal span:nth-child(4) { height: 10px; }
+.iphone-signal span:nth-child(5) { height: 12px; }
+
+/* Tambahkan margin untuk konten agar tidak ketimpa */
+body {
+  padding-top: 24px;
+}
+/* NAVIGASI BAWAH IPHONE */
+.iphone-navbar {
+  position: fixed;
+  bottom: 0px; /* Ubah ini untuk lebih ke bawah lagi */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 5px;
+  background-color: #aaa;
+  border-radius: 10px;
+  opacity: 0.9;
+  z-index: 9999;
+}
+
+  </style>
+</head>
+
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- STATUS BAR PALSU -->
+<div class="status-bar">
+<div id="jam" class="text-[12px] font-semibold">--:--</div>
+  <div class="flex items-center gap-1">
+    <!-- Sinyal -->
+    <div class="flex items-end gap-[1px]">
+      <div class="w-[2px] h-[4px] bg-black rounded-sm"></div>
+      <div class="w-[2px] h-[6px] bg-black rounded-sm"></div>
+      <div class="w-[2px] h-[8px] bg-black rounded-sm"></div>
+      <div class="w-[2px] h-[10px] bg-black rounded-sm"></div>
+      <div class="w-[2px] h-[12px] bg-black rounded-sm"></div>
+    
+
+
+
+    <!-- Baterai -->
+    <div class="flex items-center gap-1 ml-1">
+      <div class="w-4 h-2.5 border border-black rounded-sm relative flex items-center">
+        <div class="w-1/2 h-full bg-green-500"></div>
+        <div class="w-0.5 h-1.5 bg-black absolute -right-0.5 top-0.5 rounded-sm"></div>
+        <span class="text-[10px] font-semibold">57%</span>
+      </div>
+      
+    </div>
+  </div>
+</div>
+</div>
+<!-- ...konten halaman kamu... -->
+
+<!-- NAVIGASI IPHONE PALSU DI BAWAH -->
+<div class="iphone-navbar"></div>
+
+
+
+
+  <!-- Header -->
+  <div class="header">
+    <img src="logobankdki.png" alt="BANK DKI" style="filter: brightness(0) invert(1);">
+    <div class="notif">
+ <div class="notif">
+  <img src="bell.png" alt="Notifikasi" class="icon-putih" />
+  <span class="badge">9+</span>
+</div>
+</div>
+  </div>
+
+  <!-- Saldo -->
+<div class="saldo-box">
+  <div class="saldo-header">
+    <h3>Saldo Tersedia</h3>
+  </div>
+
+  <div class="saldo-nominal-container">
+    <span class="saldo-nominal" id="saldoText">Rp 32.590.000,00</span>
+    <div class="toggle-eye" id="toggleEye">
+      <img id="eyeIcon" src="tutup.png" alt="Toggle Eye" width="24" />
+    </div>
+  </div>
+
+  <div class="waktu" id="waktuSekarang">-- waktu --</div>
+</div>
+  <!-- Menu -->
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="tranfer.png" alt="Transfer">
+      <div>Transfer</div>
+    </div>
+    <div class="menu-item">
+      <img src="pay.png" alt="Bayar">
+      <div>Bayar</div>
+    </div>
+    <div class="menu-item">
+      <img src="wallet.png" alt="Top Up">
+      <div>Top Up</div>
+    </div>
+    <div class="menu-item">
+      <img src="qr-code-scan.png" alt="QRIS">
+      <div>QRIS</div>
+    </div>
+  </div>
+
+  <div class="horizontal-banner">
+    <div class="banner-card">
+      <h2>Tentang BANK DKI</h2>
+      <p>Bank milik Pemerintah Provinsi DKI Jakarta yang memberikan layanan digital modern untuk semua kalangan.</p>
+      <button>Selengkapnya</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <!-- BAR ATAS -->
+    <div class="info-bar">
+      <span>🔒 9 aktivitas terlindungi!</span>
+      <span>➤</span>
+    </div>
+
+    <!-- PENCARIAN NOMOR -->
+ <div class="transaction-box">
+    <div class="transaction-option" onclick="tampilkanPopup('masuk')">
+      <img src="masuk.png" alt="Uang Masuk" class="transaction-icon">
+      <span>Uang Masuk</span>
+    </div>
+    <div class="transaction-option" onclick="tampilkanPopup('keluar')">
+      <img src="keluar.png" alt="Uang Keluar" class="transaction-icon">
+      <span>Uang Keluar</span>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content" id="popupContent">
+      <button class="close-popup" onclick="tutupPopup()">×</button>
+      <h2 id="popupTitle">Uang Masuk</h2>
+      <p id="popupNominal">Rp 2.500.000</p>
+      <p>Transaksi terakhir: 5 Agustus 2025</p>
+    </div>
+  </div>
+
+    <!-- DEALS -->
+    <div class="deals">
+      <div class="deals-header">
+        <div>DKI Deals</div>
+        <div style="color:#007bff;">TELUSURI</div>
+      </div>
+
+      <div class="voucher">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/KFC_logo.svg" alt="KFC">
+        <div class="voucher-info">
+          <h4>Voucher KFC</h4>
+          <p>Rp3.000 - Voucher Kuliner</p>
+        </div>
+        <div class="voucher-price">Rp1.000</div>
+      </div>
+
+      <div class="voucher">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Yoshinoya_logo.svg/1200px-Yoshinoya_logo.svg.png" alt="Yoshinoya">
+        <div class="voucher-info">
+          <h4>Voucher Yoshinoya</h4>
+          <p>Rp20.000 - Voucher Kuliner</p>
+        </div>
+        <div class="voucher-price">Rp15.000</div>
+      </div>
+    </div>
+
+    <!-- TERBARU -->
+    <div class="terbaru">
+      <div class="terbaru-header">
+        <div>Terbaru Untukmu</div>
+        <div style="color:#007bff;">LIHAT SEMUA</div>
+      </div>
+
+      <div class="terbaru-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="">
+        <div>Jaminan 100% Uang Kembali<br><small>#AmanDariBadman</small></div>
+      </div>
+
+      <div class="terbaru-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/2099/2099077.png" alt="">
+        <div>STOP JUDI ONLINE<br><small>Untung Sesaat, Sesat Kemudian</small></div>
+      </div>
+
+      <div class="terbaru-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732228.png" alt="">
+        <div>DANA di Tokopedia<br><small>Serbu! Pakai Kode DANABARU</small></div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-note">
+      DANA Indonesia terdaftar serta diawasi oleh <br>
+      <strong>Bank Indonesia</strong> dan <strong>Komdigi</strong>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <div>
+      <img src="app.png" alt="Beranda">
+      <div>Beranda</div>
+    </div>
+<div onclick="tampilkanRiwayat()" style="cursor:pointer;">
+  <img src="order-history.png" alt="Riwayat" width="24">
+  <div>Riwayat</div>
+</div>
+
+<!-- Popup Riwayat Transaksi -->
+<div id="popupRiwayat" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:9999; overflow:auto;">
+  <div style="padding:20px;">
+    <h2 style="font-size:18px; font-weight:bold; margin-bottom:16px;">Riwayat Transaksi</h2>
+
+    <!-- Riwayat 1 -->
+    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Transfer Masuk</div>
+        <div style="font-size:12px; color:gray;">06 Agst 2025, 04:12:09</div>
+        <div style="font-size:12px; color:gray;">PT.AGENCY TIGOHOST ID...</div>
+      </div>
+  <div style="color:green; font-weight:bold; display:flex; align-items:flex-start; justify-content:end;">+Rp 5,250.000.00</div>
+    </div>
+
+
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Uang Keluar</div>
+        <div style="font-size:12px; color:gray;">05 Agst 2025, 12:10:36</div>
+        <div style="font-size:12px; color:gray;">BANK BRI -1597****8000</div>
+      </div>
+      <div style="text-align:right; color:red; font-weight:bold;">-Rp 27,100.000.00</div>
+    </div>
+
+
+
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Transfer Masuk</div>
+        <div style="font-size:12px; color:gray;">16 Juli 2025, 20:12</div>
+        <div style="font-size:12px; color:gray;">Nomor: 0812••••2345</div>
+      </div>
+  <div style="color:green; font-weight:bold; display:flex; align-items:flex-start; justify-content:end;">+Rp 1,250.000.00</div>
+    </div>
+
+
+
+
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Transfer Masuk</div>
+        <div style="font-size:12px; color:gray;">16 Juli 2025, 20:12</div>
+        <div style="font-size:12px; color:gray;">PT.AGENCY TIGOHOST ID...</div>
+      </div>
+  <div style="color:green; font-weight:bold; display:flex; align-items:flex-start; justify-content:end;">+Rp 1,250.000.00</div>
+    </div>
+
+
+
+
+
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Transfer Masuk</div>
+        <div style="font-size:12px; color:gray;">16 Juli 2025, 20:12</div>
+        <div style="font-size:12px; color:gray;">PT.AGENCY TIGOHOST ID...</div>
+      </div>
+  <div style="color:green; font-weight:bold; display:flex; align-items:flex-start; justify-content:end;">+Rp 7,250.000.00</div>
+    </div>
+
+
+
+
+
+    <!-- Riwayat 2 -->
+    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Pembayaran Pulsa</div>
+        <div style="font-size:12px; color:gray;">16 Juli 2025, 20:12</div>
+        <div style="font-size:12px; color:gray;">Nomor: 0812••••2345</div>
+      </div>
+      <div style="text-align:right; color:red; font-weight:bold;">-Rp 502.500.00</div>
+    </div>
+
+    <!-- Riwayat 3 -->
+     <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Tarik Tunai</div>
+        <div style="font-size:12px; color:gray;">16 Juli 2025, 20:12</div>
+        <div style="font-size:12px; color:gray;">ATM DKI JAKARTA</div>
+      </div>
+      <div style="text-align:right; color:red; font-weight:bold;">-Rp 502.500.00</div>
+    </div>
+
+       <!-- Riwayat 4 -->
+    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:12px 0;">
+      <div>
+        <div style="font-weight:600;">Transfer Masuk</div>
+        <div style="font-size:12px; color:gray;">16 Juli 2025, 20:12</div>
+        <div style="font-size:12px; color:gray;">PT.AGENCY TIGOHOST ID...</div>
+      </div>
+  <div style="color:green; font-weight:bold; display:flex; align-items:flex-start; justify-content:end;">+Rp 2.550.000.00</div>
+    </div>
+
+    <button onclick="tutupRiwayat()" style="margin-top:24px; background:#d90000; color:white; padding:10px 16px; border:none; border-radius:6px;">Tutup</button>
+  </div>
+</div>
+
+
+
+
+
+    <div>
+      <img src="qr-code-scan.png" alt="Scan">
+      <div>Scan</div>
+    </div>
+    <div>
+      <img src="account.png" alt="Akun">
+      <div>Akun</div>
+    </div>
+  </div>
+<script>
+
+const saldoText = document.getElementById("saldoText");
+const toggleEye = document.getElementById("toggleEye");
+const eyeIcon = document.getElementById("eyeIcon");
+
+let visible = true;
+const originalSaldo = "Rp 32.590.000,00";
+
+toggleEye.addEventListener("click", () => {
+  visible = !visible;
+  if (visible) {
+    saldoText.textContent = originalSaldo;
+    eyeIcon.src = "tutup.png";
+  } else {
+    saldoText.textContent = "Rp •••••••••";
+    eyeIcon.src = "buka.png";
+  }
+});
+
+    function updateWaktu() {
+      const now = new Date();
+      const options = {
+        weekday: undefined,
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'Asia/Jakarta',
+        hour12: false
+      };
+      const waktuFormatted = now.toLocaleString('id-ID', options).replace(/\./g, ':');
+      document.getElementById("waktuSekarang").textContent = waktuFormatted + " WIB";
+    }
+
+    updateWaktu();
+    setInterval(updateWaktu, 1000);
+
+
+   function tampilkanPopup(jenis) {
+      const overlay = document.getElementById("popupOverlay");
+      const title = document.getElementById("popupTitle");
+      const nominal = document.getElementById("popupNominal");
+
+      if (jenis === "masuk") {
+        title.textContent = "Uang Masuk";
+        nominal.textContent = "Rp 2.500.000";
+      } else {
+        title.textContent = "Uang Keluar";
+        nominal.textContent = "Rp 1.100.000";
+      }
+
+      overlay.style.display = "flex";
+    }
+
+    function tutupPopup() {
+      document.getElementById("popupOverlay").style.display = "none";
+    }
+
+
+
+
+
+  function updateJam() {
+    const sekarang = new Date();
+    const jam = sekarang.getHours().toString().padStart(2, '0');
+    const menit = sekarang.getMinutes().toString().padStart(2, '0');
+    document.getElementById('jam').textContent = `${jam}:${menit}`;
+  }
+
+  // Update setiap detik
+  setInterval(updateJam, 1000);
+
+  // Jalankan langsung saat halaman dimuat
+  updateJam();
+
+
+
+
+
+
+
+  function tampilkanRiwayat() {
+    document.getElementById("popupRiwayat").style.display = "block";
+  }
+  function tutupRiwayat() {
+    document.getElementById("popupRiwayat").style.display = "none";
+  }
+
+</script>
+</body>
+</html>
