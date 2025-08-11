@@ -454,7 +454,7 @@ input[type="text"],
 input[type="number"],
 textarea,
 .fake-input {
-  padding: 10px 50px;
+  padding: 10px 30px;
   border-radius: var(--radius);
   border: 1px solid #38b29b;
   font-size: 17px;
@@ -1489,12 +1489,15 @@ textarea {
 </div>
 
 <!-- Popup Pilih Metode -->
-<div id="popupTopUp" class="popup-fullscreen-topup">
+<div id="popupTopUp" class="popup-fullscreen-topup"> 
   <div class="popup-header-topup">
-    <span onclick="closeTopUp()">←</span> Pilih Metode Top Up
-  </div>
+    <img src="banktransfer.png" alt="Offline" style="height:20px; vertical-align:middle; margin-right:8px;">
+    <span onclick="closeTopUp()" style="cursor:pointer;">←</span> Pilih Metode Top Up
+  </div> 
+
 
   <select id="metodeTopUp" class="input-box-topup" onchange="loadMetodeTopUp()">
+    
     <option value="">Pilih Metode</option>
     <option value="bank">Transfer Bank</option>
     <option value="ewallet">E-Wallet</option>
@@ -2502,14 +2505,18 @@ function loadMetodeTopUp() {
 
   if (metode === 'bank') {
     items = [
-      {nama: "BANK BRI", logo: "offline.png", norek: "1234567890", pemilik: "PT Contoh BRI"},
-      {nama: "BANK MANDIRI", logo: "offline.png", norek: "9876543210", pemilik: "PT Contoh Mandiri"},
-      {nama: "PERMATA BANK", logo: "offline.png", norek: "5555555555", pemilik: "PT Contoh Permata"}
+      {nama: "BANK BRI", logo: "bank-bri-logo-png_.png",},
+      {nama: "BANK BNI", logo: "bank-bni-logo-png.png",},
+      {nama: "BANK MANDIRI", logo: "bankmandiri.png",},
+      {nama: "PERMATA BANK", logo: "permata-bank-logo-png.png",}
+
     ];
   } else if (metode === 'ewallet') {
     items = [
-      {nama: "OVO", logo: "offline.png", norek: "08123456789", pemilik: "PT Contoh OVO"},
-      {nama: "Dana", logo: "offline.png", norek: "08198765432", pemilik: "PT Contoh Dana"}
+      {nama: "OVO", logo: "ovoe.png",},
+      {nama: "Gopay", logo: "gopay-logo.png",},
+      {nama: "Linkaja", logo: "link-aja-logo.png",},
+      {nama: "Dana", logo: "danaaa.png", }
     ];
   }
 
@@ -2606,6 +2613,12 @@ function konfirmasiTransfer() {
   closePembayaran();
   alert("Pembayaran Top Up sedang diperiksa, mohon ditunggu.");
 }
+
+
+
+
+
+
 </script>
 
 
