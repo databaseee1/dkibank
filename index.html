@@ -977,6 +977,61 @@ textarea {
 
 
 
+
+
+
+.popup-fullscreen-topup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: white;
+  z-index: 1000;
+}
+
+.popup-header-topup {
+  background: #910505;
+  color: white;
+  padding: 15px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-box-topup {
+  width: 90%;
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn-topup {
+  width: 90%;
+  background: #0141c2;
+  color: white;
+  padding: 10px;
+  margin: 10px auto;
+  border: none;
+  border-radius: 6px;
+  display: block;
+}
+
+.item-topup {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+.item-topup:hover {
+  background: #f5f5f5;
+}
+
+.item-topup.selected {
+  background: #2c2f48;
+  color: white;
+}
+
   </style>
 </head>
 <body>
@@ -1353,18 +1408,71 @@ textarea {
 
 
 
+<!-- Shortcut E-Statement -->
+<div class="shortcut-item" onclick="openStatement()">
+  <img src="E-Statemet.png" alt="E-Statement" />
+  <span>E-Statement</span>
+</div>
+
+<!-- Modal/Popup Bukti Transaksi -->
+<div id="stepReceipt" style="display:none;">
+    <p id="r_datetime"></p>
+    <p id="r_total"></p>
+    <p id="r_ref"></p>
+    <p id="r_sumber"></p>
+    <p id="r_sumber_acc"></p>
+    <p id="r_tujuan_nama"></p>
+    <p id="r_tujuan_acc"></p>
+    <p id="r_nominal"></p>
+    <p id="r_fee"></p>
+    <p id="r_note"></p>
+</div>
 
 
 
-  <div class="shortcut-item">
-    <img src="E-Statemet.png" alt="E-Statement" />
-    <span>E-Statement</span>
+
+
+
+
+<!-- Tombol Shortcut -->
+<div class="shortcut-item" onclick="openTopUp()">
+  <img src="wallet.png" alt="Top Up" style="width:24px; filter: brightness(0) invert(1);">
+  <span>Top Up</span>
+</div>
+
+<!-- Popup Pilih Metode -->
+<div id="popupTopUp" class="popup-fullscreen-topup">
+  <div class="popup-header-topup">
+    <span onclick="closeTopUp()">←</span> Pilih Metode Top Up
   </div>
-  <div class="shortcut-item">
-<img src="wallet.png" alt="Top Up" style="filter: brightness(0) invert(1); font-weight:600;">
-    <span>Top Up</span>
+
+  <select id="metodeTopUp" class="input-box-topup" onchange="loadMetodeTopUp()">
+    <option value="">Pilih Metode</option>
+    <option value="bank">Transfer Bank</option>
+    <option value="ewallet">E-Wallet</option>
+  </select>
+
+  <div id="listMetode"></div>
+
+  <button class="btn-topup" onclick="openPembayaran()">Top Up</button>
+</div>
+
+<!-- Popup Konfirmasi Pembayaran -->
+<div id="popupPembayaran" class="popup-fullscreen-topup">
+  <div class="popup-header-topup">
+    <span onclick="closePembayaran()">←</span> Konfirmasi Pembayaran
+  </div>
+  <div style="text-align:center; padding:20px;">
+    <img id="logoBank" src="" style="width:80px; margin-bottom:10px;">
+    <h3 id="namaBank"></h3>
+    <p id="namaRekening" style="font-weight:bold;"></p>
+    <p id="nomorRekening" style="font-size:20px; font-weight:bold; cursor:pointer;" onclick="copyRekening()">-</p>
+    <p style="color:red;">Selesaikan pembayaran dalam <span id="countdown">01:00:00</span></p>
   </div>
 </div>
+</div>
+
+
     </div><br>
  
 
@@ -2306,6 +2414,120 @@ function openDetail(name, price) {
 function closeDetail() {
   document.getElementById("popupDetail").style.display = "none";
 }
+
+
+
+
+
+
+
+
+let bankTerpilih = null;
+let countdownInterval;
+
+function openTopUp() {
+  document.getElementById('popupTopUp').style.display = 'block';
+}
+
+function closeTopUp() {
+  document.getElementById('popupTopUp').style.display = 'none';
+}
+
+function loadMetodeTopUp() {
+  const metode = document.getElementById('metodeTopUp').value;
+  const list = document.getElementById('listMetode');
+  list.innerHTML = '';
+
+  let items = [];
+
+  if (metode === 'bank') {
+    items = [
+      {nama: "BANK BRI", logo: "offline.png", norek: "1234567890", pemilik: "PT Contoh BRI"},
+      {nama: "BANK MANDIRI", logo: "offline.png", norek: "9876543210", pemilik: "PT Contoh Mandiri"},
+      {nama: "PERMATA BANK", logo: "offline.png", norek: "5555555555", pemilik: "PT Contoh Permata"}
+    ];
+  } else if (metode === 'ewallet') {
+    items = [
+      {nama: "OVO", logo: "offline.png", norek: "08123456789", pemilik: "PT Contoh OVO"},
+      {nama: "Dana", logo: "offline.png", norek: "08198765432", pemilik: "PT Contoh Dana"}
+    ];
+  }
+
+  items.forEach(data => {
+    const div = document.createElement('div');
+    div.className = 'item-topup';
+    div.innerHTML = `<img src="${data.logo}" width="24" height="24"><span>${data.nama}</span>`;
+    div.onclick = () => {
+      bankTerpilih = data;
+      document.querySelectorAll('.item-topup').forEach(el => el.style.background = '');
+      div.style.background = '#e0f7ff';
+      console.log("Dipilih:", bankTerpilih);
+    };
+    list.appendChild(div);
+  });
+}
+
+function openPembayaran() {
+  if (!bankTerpilih) {
+    alert("Pilih bank atau e-wallet dulu!");
+    return;
+  }
+
+  closeTopUp();
+  document.getElementById('popupPembayaran').style.display = 'block';
+
+  document.getElementById('logoBank').src = bankTerpilih.logo;
+  document.getElementById('namaBank').textContent = bankTerpilih.nama;
+  document.getElementById('namaRekening').textContent = bankTerpilih.pemilik;
+  document.getElementById('nomorRekening').textContent = bankTerpilih.norek;
+
+  startCountdown(3600);
+}
+
+function closePembayaran() {
+  document.getElementById('popupPembayaran').style.display = 'none';
+  clearInterval(countdownInterval);
+}
+
+function startCountdown(duration) {
+  clearInterval(countdownInterval);
+  let timer = duration;
+  countdownInterval = setInterval(() => {
+    let hours = String(Math.floor(timer / 3600)).padStart(2, '0');
+    let minutes = String(Math.floor((timer % 3600) / 60)).padStart(2, '0');
+    let seconds = String(timer % 60).padStart(2, '0');
+    document.getElementById('countdown').textContent = `${hours}:${minutes}:${seconds}`;
+    if (--timer < 0) {
+      clearInterval(countdownInterval);
+      document.getElementById('countdown').textContent = "Waktu habis";
+    }
+  }, 1000);
+}
+
+function copyRekening() {
+  navigator.clipboard.writeText(bankTerpilih.norek);
+  alert("Nomor rekening disalin!");
+}
+
+
+
+function openStatement() {
+  if (!window.pendingTransfer) {
+    const saved = localStorage.getItem("lastTransaction");
+    if (saved) {
+      window.pendingTransfer = JSON.parse(saved);
+    }
+  }
+
+  if (!window.pendingTransfer) {
+    alert("Belum ada transaksi yang bisa ditampilkan.");
+    return;
+  }
+
+  generateReceipt();
+}
+
+
 </script>
 
 
