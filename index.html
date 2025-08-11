@@ -418,13 +418,13 @@ img {
 .modal h3 {
   margin: 0;
   font-size: 22px;
-  color: #ffffff00;
+  color: #ffffff;
   font-weight: 700;
 }
 
 .close-btn {
   background: var(--primary-light);
-  color: rgba(205, 205, 205, 0);
+  color: rgb(94, 92, 92);
   border-radius: 8px;
   padding: 8px 14px;
   border: none;
@@ -434,7 +434,7 @@ img {
 }
 
 .close-btn:hover {
-  background: #5c0000;
+  background: #820505;
 }
 
 /* Form */
@@ -704,6 +704,125 @@ textarea {
 }
 
 
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -20px); }
+  20% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+#pinOverlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}
+
+#pinBox {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 250px;
+}
+
+#pinInput {
+  padding: 1px;
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#pinSubmit {
+  padding: 10px 15px;
+  background: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+/* POPUP BACKGROUND */
+.popup {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50%; /* setengah layar */
+  background: rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
+/* POPUP CONTENT */
+.popup-content {
+  background: white;
+  height: 100%;
+  padding: 20px;
+  border-radius: 12px 12px 0 0;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.popup-content h3 {
+  margin-bottom: 10px;
+}
+
+.popup-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.popup-content ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.popup-content ul li ul {
+  padding-left: 15px;
+  font-size: 14px;
+  border: none;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+
+/* SUBMENU STYLE */
+.submenu {
+  display: none;
+  padding-left: 15px;
+  font-size: 14px;
+}
+.submenu li {
+  border-bottom: none;
+  padding: 6px 0;
+}
+
 
 
 
@@ -713,11 +832,42 @@ textarea {
 <body>
 
     
-  <div class="header">
-<div class="topbar">
-  <img src="jakonemobile.png" alt="Logo" class="logo">
-<img src="more.png" alt="Menu" class="menu-icon" style="filter: brightness(0) invert(1);">
+<!-- HEADER -->
+<div class="header">
+  <div class="topbar">
+    <img src="jakonemobile.png" alt="Logo" class="logo">
+    <img src="more.png" alt="Menu" class="menu-icon" style="filter: brightness(0) invert(1);" onclick="openMenuPopup()">
+  </div>
 </div>
+
+<!-- POPUP MENU -->
+<div id="menuPopup" class="popup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closeMenuPopup()">✖</span>
+    <h3>Syarat & Ketentuan</h3>
+    <ul>
+      <li>Data Resmi</li>
+      <li>Deposito</li>
+      <li>e-Commerce</li>
+      <li onclick="toggleSubmenu(this)">Tutorial ▼
+  <ul class="submenu">
+    <li>Cara Deposit</li>
+    <li>Cara Daftar Prioritas</li>
+    <li>Cara Daftar OJK</li>
+    <li>Cara Daftar NPWP</li>
+    <li>Cara Login Gagal</li>
+    <li>Aktivitas</li>
+  </ul>
+</li>
+      <li>Tabungan</li>
+      <li>Layanan Bank</li>
+      <li>Layanan Transaksi</li>
+      <li>Layanan E-wallet</li>
+      <li>Layanan OJK</li>
+      <li>Layanan KPP</li>
+      <li>History Transaksi</li>
+    </ul>
+  </div>
 </div>
 
 <div class="user-info">
@@ -749,36 +899,37 @@ textarea {
 <div class="balance-box">
   <div>
     <div style="display: flex; align-items: center; gap: 6px;">
-  <span>Saldo Tabungan</span><br><br>
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-       stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-    <polyline points="9 18 15 12 9 6"></polyline>
-  </svg>
-</div>
+      <span>Saldo Tabungan</span><br><br>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </div>
     <div>
-      <span class="saldo-text" data-saldo="Rp481.000.000">Rp481.000.000</span>
+      <span class="saldo-text" data-saldo="241.050.000">Rp241.050.000</span>
       <img src="buka.png" class="eye-icon" onclick="toggleSaldo(this)">
-<div>
-  <span class="nomorRek">820****721</span>
-  <img src="copy.png" onclick="salinrek(this)" style="width:14px; vertical-align:middle; margin-left:4px; filter: brightness(0) invert(1); cursor:pointer;" alt="Salin">
-</div>
+      <div>
+        <span class="nomorRek">820****721</span>
+        <img src="copy.png" onclick="salinrek(this)" style="width:14px; vertical-align:middle; margin-left:4px; filter: brightness(0) invert(1); cursor:pointer;" alt="Salin">
+      </div>
     </div>
   </div>
+
   <div>
     <div style="display: flex; align-items: center; gap: 6px;">
-  <span>JakOne Pay</span><br><br>
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-       stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-    <polyline points="9 18 15 12 9 6"></polyline>
-  </svg>
-</div>
+      <span>JakOne Pay</span><br><br>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </div>
     <div>
-  <span class="saldo-text" data-saldo="Rp1.500.000">Rp•••••••</span>
-  <img src="buka.png" class="eye-icon" onclick="toggleSaldo(this)">
-  <br>
-  <span id="nomorWA">0852*****949</span>
-  <img src="copy.png" onclick="salinNomor()" style="width:14px; vertical-align:middle; margin-left:4px; filter: brightness(0) invert(1); cursor:pointer;" alt="Salin">
-</div>
+      <span class="saldo-text" data-saldo="1500000">Rp1.500.000</span>
+      <img src="buka.png" class="eye-icon" onclick="toggleSaldo(this)">
+      <br>
+      <span id="nomorWA">0852*****949</span>
+      <img src="copy.png" onclick="salinNomor()" style="width:14px; vertical-align:middle; margin-left:4px; filter: brightness(0) invert(1); cursor:pointer;" alt="Salin">
+    </div>
   </div>
 </div>
 
@@ -883,6 +1034,17 @@ textarea {
           <button class="btn btn-primary" id="submitTransfer" style="width:100%">Lanjutkan Transfer</button>
         </div>
       </div>
+
+
+      <!-- Popup PIN -->
+<div id="pinOverlay">
+  <div id="pinBox">
+    <h3>Masukkan PIN</h3>
+    <input type="password" id="pinInput" maxlength="6" placeholder="••••••">
+    <br>
+    <button id="pinSubmit">Transfer</button>
+  </div>
+</div>
 
       <!-- Receipt Step (initially hidden) -->
        
@@ -1621,45 +1783,175 @@ function tutupFilter() {
   }
 
   /* submit (Lanjutkan Transfer) */
-  submitTransfer.addEventListener('click', (e)=>{
-    // minimal validation
-    const nama = namaPenerima.value.trim();
-    const no = nomorRek.value.trim();
-    const nom = parseFloat(nominal.value);
-    if(!chosenBank){
-      alert('Pilih Bank / E-Wallet terlebih dahulu.');
-      return;
+ /* submit (Lanjutkan Transfer) */
+submitTransfer.addEventListener('click', (e) => {
+  const nama = namaPenerima.value.trim();
+  const no = nomorRek.value.trim();
+  const nom = parseFloat(nominal.value);
+
+  if (!chosenBank) { alert('Pilih Bank / E-Wallet terlebih dahulu.'); return; }
+  if (!nama) { alert('Masukkan nama penerima.'); return; }
+  if (!no) { alert('Masukkan nomor rekening / ID e-wallet.'); return; }
+  if (!nom || nom <= 0) { alert('Masukkan nominal yang valid.'); return; }
+
+  // simpan data sementara
+  window.pendingTransfer = { nama, no, nom };
+
+  // tampilkan popup PIN
+  document.getElementById('pinOverlay').style.display = 'flex';
+});
+
+// verifikasi PIN
+document.getElementById('pinSubmit').addEventListener('click', () => {
+  const correctPIN = "123456"; // PIN benar
+  const inputPIN = document.getElementById('pinInput').value.trim();
+
+  if (inputPIN === correctPIN) {
+    showBRImoNotif(true);
+    generateReceipt(); // PIN benar → generate bukti
+  } else {
+    showBRImoNotif(false); // PIN salah
+  }
+
+  // reset popup PIN
+  document.getElementById('pinOverlay').style.display = 'none';
+  document.getElementById('pinInput').value = '';
+});
+
+// fungsi generate bukti transaksi
+function generateReceipt() {
+  const { nama, no, nom } = window.pendingTransfer;
+
+  // generate receipt data
+  const now = new Date();
+  const dtString = now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'medium' });
+  const ref = 'REF' + Math.floor(100000 + Math.random() * 899999);
+  const fee = 0;
+  const total = nom;
+
+  // fill template
+  r_datetime.textContent = dtString + ' WIB';
+  r_total.textContent = formatRupiah(total);
+  r_ref.textContent = '#' + ref;
+  r_sumber.textContent = 'IZUNA WINATTA';
+  r_sumber_acc.textContent = 'BANK DKI - 3544****625';
+  r_tujuan_nama.textContent = nama;
+  r_tujuan_acc.textContent = chosenBank + ' - ' + maskAccount(no);
+  r_nominal.textContent = formatRupiah(nom);
+  r_fee.textContent = 'Rp 0';
+  r_note.textContent = catatan.value.trim() ? catatan.value.trim() : '---';
+
+  // show receipt
+  stepForm.style.display = 'none';
+  stepReceipt.style.display = 'block';
+  document.querySelector('.modal').scrollTop = 0;
+}
+function formatRupiah(angka) {
+  return 'Rp' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+
+
+
+
+function animateSaldo(element, start, end, duration) {
+  const range = end - start;
+  const startTime = performance.now();
+
+  function step(currentTime) {
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const value = Math.floor(start + range * progress);
+    element.textContent = formatRupiah(value);
+    if (progress < 1) {
+      requestAnimationFrame(step);
     }
-    if(!nama){ alert('Masukkan nama penerima.'); return; }
-    if(!no){ alert('Masukkan nomor rekening / ID e-wallet.'); return; }
-    if(!nom || nom <= 0){ alert('Masukkan nominal yang valid.'); return; }
+  }
+  requestAnimationFrame(step);
+}
 
-    // generate receipt data
+function formatRupiah(angka) {
+  return 'Rp' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function bersihkanRupiah(str) {
+  return parseInt(str.toString().replace(/\./g, '').replace(/[^0-9]/g, ''), 10) || 0;
+}
+
+
+function transfer() {
+  const nominal = parseInt(document.getElementById('nominal').value);
+  if (!nominal || nominal <= 0) return alert("Masukkan nominal yang valid!");
+
+  // Ambil elemen saldo tabungan
+  const saldoEl = document.querySelector('.balance-box .saldo-text');
+let saldoAwal = bersihkanRupiah(String(saldoEl.getAttribute('data-saldo')));
+
+  if (nominal > saldoAwal) return alert("Saldo tidak mencukupi!");
+
+  const saldoAkhir = saldoAwal - nominal;
+
+  // Simpan kembali angka murni
+  saldoEl.setAttribute('data-saldo', saldoAkhir);
+
+  // Pastikan setelah animasi, tampilannya benar
+  setTimeout(() => {
+    saldoEl.textContent = formatRupiah(saldoAkhir);
+  }, 1500);
+
+    // Notifikasi sukses
+  showBRImoNotif(true);
+}
+
+
+
+
+function showBRImoNotif(success) {
+  const notif = document.createElement('div');
+
+  notif.innerHTML = `
+    <div style="
+      background:${success ? '#4CAF50' : '#F44336'};
+      color:white; padding:15px 20px; border-radius:8px;
+      font-size:16px; font-weight:bold;
+      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+      position:relative; 
+      display:flex; flex-direction:column; align-items:center; gap:0px;
+      text-align:center; min-width:250px;
+    ">
+      <!-- Tombol close -->
+      <img src="tututpp.png" 
+           style="width:18px; height:18px; position:absolute; top:8px; right:8px; cursor:pointer;" 
+           onclick="this.parentElement.parentElement.remove()">
+
+      <!-- Jam realtime -->
+      <div id="notif-clock" style="font-size:10px; opacity:0.9;"></div>
+
+      <!-- Baris gambar + teks -->
+      <div style="display:flex; align-items:center; gap:10px;">
+        <img src="${success ? 'donne.png' : 'erorwarning.png'}" 
+             style="width:30px; height:30px; background:white; padding:4px; border-radius:50%;">
+        <span>${success ? 'Transfer Berhasil' : 'Transfer Gagal'}</span>
+      </div>
+    </div>
+  `;
+
+  notif.style.cssText = `
+    position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    z-index:9999;
+  `;
+
+  document.body.appendChild(notif);
+
+  // Fungsi update jam realtime
+  function updateClock() {
     const now = new Date();
-    const dtString = now.toLocaleString('id-ID', {dateStyle:'medium', timeStyle:'medium'});
-    const ref = 'REF' + Math.floor(100000 + Math.random()*899999);
-    const fee = 0; // contoh: bisa di-calc atau di-set
-    const total = nom; // include fee if any
+    const waktu = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    notif.querySelector('#notif-clock').textContent = waktu;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+}
 
-    // fill template
-    r_datetime.textContent = dtString + ' WIB';
-    r_total.textContent = formatRupiah(total);
-    r_ref.textContent = '#' + ref;
-    r_sumber.textContent = 'IZUNA WINATTA';
-    r_sumber_acc.textContent = 'BANK DKI - 3544****625'; // contoh sumber
-    r_tujuan_nama.textContent = nama;
-    r_tujuan_acc.textContent = chosenBank + ' - ' + maskAccount(no);
-    r_nominal.textContent = formatRupiah(nom);
-    r_fee.textContent = 'Rp 0';
-    r_note.textContent = catatan.value.trim() ? catatan.value.trim() : '---';
-
-    // show receipt, hide form
-    stepForm.style.display = 'none';
-    stepReceipt.style.display = 'block';
-
-    // optional: scroll to top of modal
-    document.querySelector('.modal').scrollTop = 0;
-  });
 
   // finish / close handlers
   document.getElementById('finishBtn').addEventListener('click', ()=> overlay.style.display='none');
@@ -1709,32 +2001,27 @@ setInitialWithIcon('sumberrrrrrrrr', 'r_sumber');
 setInitialWithIcon('initialtujuannnnn', 'r_tujuan_nama');
 
 
+function openMenuPopup() {
+  document.getElementById("menuPopup").style.display = "block";
+}
+function closeMenuPopup() {
+  document.getElementById("menuPopup").style.display = "none";
+}
 
 
- function tampilkanUcapanWaktu() {
-    const jam = new Date().getHours();
-    let ucapan = "Selamat";
 
-    if (jam >= 4 && jam < 11) {
-      ucapan = "Selamat Pagi 🌅";
-    } else if (jam >= 11 && jam < 15) {
-      ucapan = "Selamat Siang 🌤";
-    } else if (jam >= 15 && jam < 18) {
-      ucapan = "Selamat Sore 🌇";
-    } else {
-      ucapan = "Selamat Malam 🌙";
-    }
+function toggleSubmenu(el) {
+  const submenu = el.querySelector('.submenu');
+  const isOpen = submenu.style.display === 'block';
+  
+  // Tutup semua submenu lain
+  document.querySelectorAll('.submenu').forEach(s => s.style.display = 'none');
 
-    const target = document.getElementById("ucapanWaktuDino");
-    if (target) {
-      target.innerText = ucapan;
-    } else {
-      console.warn("Elemen ucapan tidak ditemukan.");
-    }
+  // Buka kalau sebelumnya tertutup
+  if (!isOpen) {
+    submenu.style.display = 'block';
   }
-
-  // Jalankan saat halaman selesai dimuat
-  document.addEventListener("DOMContentLoaded", tampilkanUcapanWaktu);
+}
 
 
 </script>
