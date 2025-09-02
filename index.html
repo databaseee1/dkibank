@@ -1686,6 +1686,13 @@ g</div>
     ">
     </span>
 
+    <!-- Tombol Kembali -->
+    <span onclick="tutupMutasi()" 
+      style="position: absolute; left: 20px; cursor: pointer;">
+  <img src="back_gray.png" alt="Kembali" style="width:22px; height:22px;">
+</span>
+
+
     <!-- Judul -->
     <span style="font-size: 20px; font-weight: 600; text-align: center;">
       Mutasi
@@ -1706,13 +1713,35 @@ g</div>
     display: inline-block; 
     border: 1px solid #ddd;
 ">
-  <p style="font-size: 12px; margin: 0;">Agustus 2025</p>
+  <p id="currentMonth" style="font-size: 12px; margin: 0;">September 2025</p>
 </div>  
 <!-- Box untuk ikon filter -->
-<div style="border: 1px solid #ddd; border-radius: 8px; padding: 5px; display: inline-block; background: #fff;">
-  <img src="filter.png" alt="Filter" style="height:20px; width:auto; cursor:pointer;">
+
+
+<!-- Ikon Filter -->
+<!-- Ikon Filter -->
+<div id="filterBulan" 
+     style="border:1px solid #ddd; border-radius:8px; padding:5px; display:inline-block; background:#fff; cursor:pointer; position:relative; z-index:5000;">
+  <img src="filter.png" alt="Filter" style="height:20px; width:auto;">
+
+  <!-- Dropdown bulan -->
+  <div id="filterDropdownBulan" 
+       style="display:none; position:absolute; top:40px; left:0; background:#fff; 
+              border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2); z-index:6000;">
+    <div onclick="pilihBulan('Agustus 2025')" style="padding:8px; cursor:pointer;">Agustus 2025</div>
+    <div onclick="pilihBulan('September 2025')" style="padding:8px; cursor:pointer;">September 2025</div>
+    <div onclick="pilihBulan('Oktober 2025')" style="padding:8px; cursor:pointer;">Oktober 2025</div>
+    <div onclick="pilihBulan('November 2025')" style="padding:8px; cursor:pointer;">November 2025</div>
+    <div onclick="pilihBulan('Desember 2025')" style="padding:8px; cursor:pointer;">Desember 2025</div>
+  </div>
 </div>
+
+
 </div>
+
+
+
+
 
 <div style="
   background: #ffffff;
@@ -1722,6 +1751,111 @@ g</div>
   font-family: 'Roboto', Arial, sans-serif;
 ">
   <!-- Bagian atas -->
+
+
+
+  <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
+  <div>
+
+    
+<div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+  <img src="sukkses.png" alt="Icon" style="width:14px; height:14px; margin-right:5px;">
+  Uang Masuk
+</div>    <div style="font-size:10px; color:gray;">02 September 2025, 12:51</div>
+    <div style="font-size:12px; color:rgb(73, 67, 67);">Dari <strong> PT.AGENCY TIGOHOST ...</strong></div>
+ 
+  </div>
+  
+  <div style="text-align:right;">
+    <div style="font-weight:600; font-size: 12px; color:#2e7d32;">Rp 7.259.210</div>
+        <div style="font-size:10px; color:gray;">12:51 WIB</div>
+
+    <div style="
+      display:inline-block; 
+      background: #e6f4ea; 
+      color: #2e7d32; 
+      font-size:10px; 
+      font-weight:600; 
+      padding: 1px 8px; 
+      border-radius: 3px;
+      border: 1px solid #c8e6c9;
+      margin-top: 3px;
+      
+    ">
+      Berhasil
+    </div>
+  </div>
+</div>
+
+
+  <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
+  <div>
+
+    
+<div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+  <img src="pasca.png" alt="Icon" style="width:20px; height:20px; margin-right:5px;">
+  Beli Pulsa
+</div>    <div style="font-size:10px; color:gray;">02 September 2025, 09:21</div>
+    <div style="font-size:12px; color:rgb(73, 67, 67);">SN <strong> 986255387213...</strong></div>
+  </div>
+  
+  <div style="text-align:right;">
+<div style="font-weight:600; font-size: 12px; color:#ff0000;">-Rp 210.500</div>        
+        <div style="font-size:10px; color:gray;">09:21 WIB</div>
+
+    <div style="
+      display:inline-block; 
+      background: #e6f4ea; 
+      color: #2e7d32; 
+      font-size:10px; 
+      font-weight:600; 
+      padding: 1px 8px; 
+      border-radius: 3px;
+      border: 1px solid #c8e6c9;
+      margin-top: 3px;
+      
+    ">
+      Berhasil
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div style="
+    background: #f5f5f5; 
+    border-radius: 6px; 
+    padding: 8px 12px; 
+    display: block; 
+    border: 1px solid #ddd;
+    width: 100%;          
+    box-sizing: border-box;
+">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    
+    <!-- bulan -->
+    <p id="currentMonth" style="font-size: 12px; margin: 0; font-weight: bold; color:#444;">
+      Agustus 2025
+    </p>
+
+    <!-- pemisah -->
+    <div style="height: 18px; border-left:1px solid #ccc; margin: 0 10px;"></div>
+
+    <!-- total transaksi bulan lalu -->
+    <p style="font-size: 10px; margin: 0; font-weight: bold; color:#444;">
+      Transaksi bulan lalu <span style="color:green;">Rp 73.380.020</span>
+    </p>
+  </div>
+</div>
+
+
 
   <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
   <div>
@@ -2187,43 +2321,6 @@ style="filter: brightness(0) invert(1); width: 25px; height: 25px;">
 
 
 
-function bukaFilter() {
-  // Cek kalau popup filter belum ada, buat secara dinamis
-  let popup = document.getElementById("popupFilter");
-  if (!popup) {
-    popup = document.createElement("div");
-    popup.id = "popupFilter";
-    popup.style.position = "fixed";
-    popup.style.top = "50%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.style.background = "#fff";
-    popup.style.padding = "20px";
-    popup.style.borderRadius = "10px";
-    popup.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
-    popup.style.zIndex = "9999";
-
-    popup.innerHTML = `
-      <h3 style="margin-top:0;">Filter</h3>
-      <label>
-        <input type="checkbox" name="verified"> Diverifikasi
-      </label><br>
-      <label>
-        <input type="checkbox" name="online"> Sedang Online
-      </label><br><br>
-      <button onclick="tutupFilter()" style="background:red;color:#fff;border:none;padding:8px 14px;border-radius:5px;cursor:pointer;">Tutup</button>
-    `;
-
-    document.body.appendChild(popup);
-  } else {
-    popup.style.display = "block";
-  }
-}
-
-function tutupFilter() {
-  const popup = document.getElementById("popupFilter");
-  if (popup) popup.style.display = "none";
-}
 
 
 
@@ -2847,6 +2944,33 @@ function konfirmasiTransfer() {
 
 
 
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const filterBulan = document.getElementById("filterBulan");
+  const filterDropdown = document.getElementById("filterDropdownBulan");
+  const currentMonth = document.getElementById("currentMonth");
+
+  // toggle dropdown saat klik icon filter
+  filterBulan.addEventListener("click", function(e) {
+    e.stopPropagation();
+    filterDropdown.style.display = 
+      filterDropdown.style.display === "block" ? "none" : "block";
+  });
+
+  // fungsi pilih bulan
+  window.pilihBulan = function(bulan) {
+    currentMonth.textContent = bulan;
+    filterDropdown.style.display = "none";
+  };
+
+  // klik di luar → tutup dropdown
+  document.addEventListener("click", function(e) {
+    if (!filterBulan.contains(e.target)) {
+      filterDropdown.style.display = "none";
+    }
+  });
+});
 
 </script>
 
