@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=300, initial-scale=1.0">
   <title>Form Struk Pertamina</title>
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: monospace; font-size: 13px; background: #f8f8f8; padding: 20px; }
+    * { box-sizing: border-box; font-size: 12px; }
+    body { font-family: monospace; font-size: 12px; background: #f8f8f8; padding: 20px; }
 
     .form-container {
       max-width: 400px;
@@ -66,7 +66,7 @@
 
     .center { text-align: center; font-size: 12px; }
     .line { border-top: 1px dashed #000; margin: 10px 0; }
-    .logo { width: 110px; display: block; margin: 0 auto 5px; }
+    .logo { width: 110px; display: block; margin: 0 auto 7px; }
 
     .btn-cetak {
       display: block;
@@ -80,29 +80,26 @@
       font-size: 12px;
     }
 
+    @media print {
+      .form-container,
+      .btn-cetak,
+      .footer {
+        display: none;
+      }
+      @page { size: 58mm auto; margin: 0; }
+      body { margin: 0; }
+      #struk { display: block; }
+    }
 
-
-@media print {
-  .form-container,
-  .btn-cetak,
-  .footer {
-    display: none;
-  }
-  @page { size: 58mm auto; margin: 0; }
-  body { margin: 0; }
-  #struk { display: block; }
-}
-
-
- .footer {
-  font-size: 5px;
-  position: fixed;     /* selalu nempel di layar */
-  bottom: 500px;         /* jarak dari bawah */
-  left: 50%;           /* mulai dari tengah */
-  transform: translateX(-50%); /* benerin posisi ke tengah */
-  text-align: center;
-  color: #555;
-}
+    .footer {
+      font-size: 5px;
+      position: fixed;
+      bottom: 500px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #555;
+    }
   </style>
 </head>
 
@@ -156,19 +153,19 @@
   </form>
 </div>
 
-
-
   <!-- STRUK -->
   <div id="struk">
     <div style="text-align:center; margin-bottom:-9px;">
       <img src="https://pertamina.com/images/Pertamina_Logo.svg" class="logo" alt="Logo Pertamina">
     </div>
-<div class="center">
-  <strong>&nbsp;&nbsp;&nbsp;<span id="noTransaksi">13208106</span></strong>
-</div>
+    <!-- Default No Transaksi (tidak ikut form) -->
+    <div class="center">
+      <strong>&nbsp;&nbsp;&nbsp;<span id="noTransDefault">13208106</span></strong>
+    </div>
     <div class="center">SPBU STABAT-TG.PURA,CEMPA</div>
     <div class="center">JL. STABAT-TG.PURA,CEMPA,HINAI</div>
-    Shift: <span id="shiftOut"></span>  No. Trans:<span id="noTransOut"></span><br>
+    Shift: <span id="shiftOut"></span>  
+    No. Trans: <span id="noTransOut"></span><br>
     Waktu: <span id="waktu"></span><br>
     <div class="line"></div>
 
@@ -194,27 +191,22 @@
     <button onclick="window.print()" class="btn-cetak">Cetak</button>
   </div>
 
-
-
-
   <script>
     // auto isi waktu default sekarang
     window.addEventListener("load", () => {
       const now = new Date();
       const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-        .toISOString().slice(0,16); // format yyyy-MM-ddTHH:mm
+        .toISOString().slice(0,16);
       document.getElementById("waktuInput").value = local;
     });
 
     document.getElementById("strukForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      // ambil waktu dari input (biar bisa manual ubah)
       const waktuManual = document.getElementById("waktuInput").value;
       const waktuFormat = new Date(waktuManual).toLocaleString("id-ID");
 
       // isi ke struk
-      document.getElementById("noTransaksi").textContent = document.getElementById("noTrans").value;
       document.getElementById("noTransOut").textContent = document.getElementById("noTrans").value;
       document.getElementById("shiftOut").textContent = document.getElementById("shift").value;
       document.getElementById("pulauOut").textContent = document.getElementById("pulau").value;
@@ -232,22 +224,6 @@
       document.getElementById("struk").style.display = "block";
       window.scrollTo(0, document.body.scrollHeight);
     });
-
-
-
-      // isi otomatis waktu sekarang ke input datetime-local
-  window.addEventListener("DOMContentLoaded", () => {
-    const waktuInput = document.getElementById("waktuInput");
-    const now = new Date();
-
-    const formatted = now.getFullYear() + "-" +
-      String(now.getMonth() + 1).padStart(2, '0') + "-" +
-      String(now.getDate()).padStart(2, '0') + "T" +
-      String(now.getHours()).padStart(2, '0') + ":" +
-      String(now.getMinutes()).padStart(2, '0');
-
-    waktuInput.value = formatted;
-  });
   </script>
 
 </body>
