@@ -146,8 +146,8 @@
     <label>No. Plat</label>
     <input type="text" id="plat" placeholder="BK8472EW" required>
   
-    <label>Waktu</label>
-    <input type="datetime-local" id="waktuInput" required>
+<label>Waktu</label>
+<input type="text" id="waktuInput" placeholder="30/08/2025 16:44:15" required>
   
     <button type="submit">Buat Struk</button>
   </form>
@@ -191,39 +191,44 @@
     <button onclick="window.print()" class="btn-cetak">Cetak</button>
   </div>
 
+  
+  
   <script>
-    // auto isi waktu default sekarang
-    window.addEventListener("load", () => {
-      const now = new Date();
-      const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-        .toISOString().slice(0,16);
-      document.getElementById("waktuInput").value = local;
-    });
 
-    document.getElementById("strukForm").addEventListener("submit", function(e) {
-      e.preventDefault();
 
-      const waktuManual = document.getElementById("waktuInput").value;
-      const waktuFormat = new Date(waktuManual).toLocaleString("id-ID");
+  // auto isi waktu default sekarang (untuk input)
 
-      // isi ke struk
-      document.getElementById("noTransOut").textContent = document.getElementById("noTrans").value;
-      document.getElementById("shiftOut").textContent = document.getElementById("shift").value;
-      document.getElementById("pulauOut").textContent = document.getElementById("pulau").value;
-      document.getElementById("produkOut").textContent = document.getElementById("produk").value;
-      document.getElementById("hargaOut").textContent = document.getElementById("harga").value;
-      document.getElementById("volumeOut").textContent = document.getElementById("volume").value;
-      document.getElementById("totalOut").textContent = document.getElementById("total").value;
-      document.getElementById("operatorOut").textContent = document.getElementById("operator").value;
-      document.getElementById("cashOut").textContent = document.getElementById("cash").value;
-      document.getElementById("changeOut").textContent = document.getElementById("change").value;
-      document.getElementById("platOut").textContent = document.getElementById("plat").value;
-      document.getElementById("waktu").textContent = waktuFormat;
+ 
 
-      // tampilkan struk
-      document.getElementById("struk").style.display = "block";
-      window.scrollTo(0, document.body.scrollHeight);
-    });
+  document.getElementById("strukForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+  const waktuFormat = document.getElementById("waktuInput").value;
+document.getElementById("waktu").textContent = waktuFormat;
+
+
+
+ 
+    // isi ke struk
+    document.getElementById("noTransOut").textContent = document.getElementById("noTrans").value;
+    document.getElementById("shiftOut").textContent = document.getElementById("shift").value;
+    document.getElementById("pulauOut").textContent = document.getElementById("pulau").value;
+    document.getElementById("produkOut").textContent = document.getElementById("produk").value;
+    document.getElementById("hargaOut").textContent = document.getElementById("harga").value;
+    document.getElementById("volumeOut").textContent = document.getElementById("volume").value;
+    document.getElementById("totalOut").textContent = document.getElementById("total").value;
+    document.getElementById("operatorOut").textContent = document.getElementById("operator").value;
+    document.getElementById("cashOut").textContent = document.getElementById("cash").value;
+    document.getElementById("changeOut").textContent = document.getElementById("change").value;
+    document.getElementById("platOut").textContent = document.getElementById("plat").value;
+    document.getElementById("waktu").textContent = waktuFormat;
+
+    // tampilkan struk
+    document.getElementById("struk").style.display = "block";
+    window.scrollTo(0, document.body.scrollHeight);
+  });
+
+
   </script>
 
 </body>
