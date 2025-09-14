@@ -396,7 +396,7 @@ img {
 .modal {
   width: 100%;
   max-width: 760px;
-  height: 92vh;
+  height: 80vh;
   background: var(--card);
   border-radius: 20px 20px 0 0;
   box-shadow: var(--box-shadow);
@@ -652,7 +652,7 @@ textarea {
 #stepReceipt {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgb(255, 255, 255);
   z-index: 9999;
   display: none; /* awalnya hidden */
   overflow-y: auto;
@@ -661,7 +661,7 @@ textarea {
 #stepReceipt > div {
   background: var(--card, #fff);
   max-width: 600px;
-  margin: 40px auto;
+  margin: 65px auto;
   border-radius: 12px;
   padding: 20px;
   box-shadow: var(--box-shadow, 0 8px 24px rgba(0,0,0,0.1));
@@ -779,7 +779,7 @@ textarea {
 /* CLOSE BUTTON */
 .close-btn {
   position: absolute;
-  top: 10px;
+  top: 120px;
   right: 20px;
   font-size: 20px;
   cursor: pointer;
@@ -1213,7 +1213,7 @@ textarea {
         <header>
           <h3 id="modalTitle">Menu Transfer</h3>
           <div>
-            <button class="close-btn" id="closeModal">Tutup ✕</button>
+            <button class="close-btn" id="closeModal">✕</button>
           </div>
         </header>
 
@@ -1284,7 +1284,7 @@ textarea {
         </div>
 
         <div style="padding-top:6px">
-          <button class="btn btn-primary" id="submitTransfer" style="width:100%">Lanjutkan Transfer</button>
+          <button class="btn btn-primary" id="submitTransfer" style="width:100%; background:#a50021;">Lanjutkan Transfer</button>
         </div>
       </div>
 
