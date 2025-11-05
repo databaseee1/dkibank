@@ -1197,7 +1197,7 @@ textarea {
   <div class="shortcut-box">
     <div class="shortcut-title">
       <span>Shortcut</span>
-      <span style="background:#a40000; font-size: 10px; color:white; padding:4px 10px; border-radius:5px;">Edit</span>
+      <span style="background:#a40000; font-size: 10px; color:white; padding:4px 10px; border-radius:5px;">Instal</span>
 
     </div>
     </div>
@@ -1564,7 +1564,7 @@ g</div>
   <div style="flex: 2; display: flex; align-items: center; padding: 20px; gap: 5px;">
     <img src="star-inside-circle.png" alt="Offline" style="width: 20px; border: 2px solid #6f0000; height: 20px;">
     <div>
-      <b>Point anda</b><br>112
+      <b>Point anda</b><br>19.162
     </div>
   </div>
 
@@ -1720,7 +1720,7 @@ g</div>
     display: inline-block; 
     border: 1px solid #ddd;
 ">
-  <p id="currentMonth" style="font-size: 12px; margin: 0;">Oktober 2025</p>
+  <p id="currentMonth" style="font-size: 12px; margin: 0;">November 2025</p>
 </div>  
 <!-- Box untuk ikon filter -->
 
@@ -1747,10 +1747,111 @@ g</div>
 </div>
 
 
+<div style="
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 9px 10px;
+  margin-bottom: -10px;
+  font-family: 'Roboto', Arial, sans-serif;
+">
+  <!-- BUka  -->
 
 
 
 
+<div style="display:flex; justify-content:space-between; padding:5px 0;">
+  <div>
+
+<div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+  <img src="sukkses.png" alt="Icon" style="width:14px; height:14px; margin-right:5px;">
+  Uang Masuk
+</div>   
+ <div style="font-size:10px; color:gray;">05 November 2025, 09:21</div>
+    <div style="font-size:12px; color:rgb(73, 67, 67);">Dari <strong> PT.AGENCY TIGOHOST ...</strong></div>
+ 
+  </div>
+  
+  <div style="text-align:right;">
+    <div style="font-weight:600; font-size: 12px; color:#2e7d32;">+Rp 9.412.170</div>
+        <div style="font-size:10px; color:gray;">09:21 WIB</div>
+
+    <div style="
+      display:inline-block; 
+      background: #e6f4ea; 
+      color: #2e7d32; 
+      font-size:10px; 
+      font-weight:600; 
+      padding: 1px 8px; 
+      border-radius: 3px;
+      margin-top: 3px;
+      
+    ">
+      Berhasil
+    </div>
+  </div>
+</div>
+  <div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0;">
+  <div>
+
+    
+<div style="display:flex; align-items:center; font-weight:600; font-size:12px;">
+  <img src="pasca.png" alt="Icon" style="width:20px; height:20px; margin-right:5px;">
+  Beli Pulsa
+</div>    <div style="font-size:10px; color:gray;">05 November 2025, 01:40</div>
+    <div style="font-size:12px; color:rgb(73, 67, 67);">SN <strong> 7638291252779...</strong></div>
+  </div>
+  
+  <div style="text-align:right;">
+<div style="font-weight:600; font-size: 12px; color:#ff0000;">-Rp 412.500</div>        
+        <div style="font-size:10px; color:gray;">01:40 WIB</div>
+
+    <div style="
+      display:inline-block; 
+      background: #e6f4ea; 
+      color: #2e7d32; 
+      font-size:10px; 
+      font-weight:600; 
+      padding: 1px 8px; 
+      border-radius: 3px;
+      margin-top: 3px;
+      
+    ">
+      Berhasil
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div style="
+    background: #f5f5f5; 
+    border-radius: 6px; 
+    padding: 8px 12px; 
+    display: block; 
+    border: 1px solid #ddd;
+    width: 100%;          
+    box-sizing: border-box;
+">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    
+    <!-- bulan -->
+    <p id="currentMonth" style="font-size: 12px; margin: 0; font-weight: bold; color:#444;">
+      Oktober 2025
+    </p>
+
+    <!-- pemisah -->
+    <div style="height: 18px; border-left:1px solid #ccc; margin: 0 10px;"></div>
+
+    <!-- total transaksi bulan lalu -->
+    <p style="font-size: 10px; margin: 0; font-weight: bold; color:#444;">
+      Transaksi bulan lalu <span style="color:green;">Rp 96.831.710</span>
+    </p>
+  </div>
+</div>
 
 
 
@@ -2941,6 +3042,8 @@ g</div>
     <img src="qrssss-removebg-preview.png" alt="QRIS" 
 style="filter: brightness(0) invert(1); width: 25px; height: 25px;">
   </div>
+
+  
   <div class="nav-item">
     <img src="heart.png" class="gray-icon" alt="Favorit">
     <span>Favorit</span>
@@ -2948,41 +3051,9 @@ style="filter: brightness(0) invert(1); width: 25px; height: 25px;">
 
 
 <!-- 🔹 NAVIGASI AKUN -->
-<div class="nav-item" id="navAkun">
-  <img src="account.png" class="gray-ichon" alt="Akun">
-  <span>Akun</span>
-</div>
-
-<!-- 🔹 POPUP PROFIL FULLSCREEN -->
-<div id="popupAkun" style="
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:#fff;
-  z-index:9999;
-  overflow-y:auto;
-  padding:20px;
-  box-sizing:border-box;
-">
-  <h2 style="text-align:center;">Profil Host</h2>
-  <label>Nama:</label>
-  <input id="namaProfil" type="text" style="width:100%;margin-bottom:10px;padding:8px;border:1px solid #ccc;border-radius:8px;"><br>
-  
-  <label>Email:</label>
-  <input id="emailProfil" type="text" style="width:100%;margin-bottom:10px;padding:8px;border:1px solid #ccc;border-radius:8px;"><br>
-  
-  <label>Nomor HP:</label>
-  <input id="hpProfil" type="text" style="width:100%;margin-bottom:10px;padding:8px;border:1px solid #ccc;border-radius:8px;"><br>
-  
-  <label>Nominal Saldo:</label>
-  <input id="saldoProfil" type="text" style="width:100%;margin-bottom:10px;padding:8px;border:1px solid #ccc;border-radius:8px;"><br>
-
-  <label>Nominal E-Wallet:</label>
-  <input id="ewalletProfil" type="text" style="width:100%;margin-bottom:20px;padding:8px;border:1px solid #ccc;border-radius:8px;"><br>
-
-  <button id="simpanProfil" style="width:100%;padding:10px;background:#2196f3;color:white;border:none;border-radius:10px;">Simpan</button>
-  <button id="tutupProfil" style="width:100%;margin-top:10px;padding:10px;background:#e91e63;color:white;border:none;border-radius:10px;">Tutup</button>
+<div class="nav-item" id="Navakunprofil_nav" style="cursor:pointer;">
+  <img src="account.png" class="gray-ichon" alt="Akun" style="width:30px; display:block; margin:0 auto;">
+  <span style="display:block; text-align:center; font-size:14px;">Akun</span>
 </div>
 
 
@@ -3695,47 +3766,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-
-document.addEventListener("DOMContentLoaded", function() {
-  const navAkun = document.getElementById("navAkun");
-  const popupAkun = document.getElementById("popupAkun");
-  const simpanProfil = document.getElementById("simpanProfil");
-  const tutupProfil = document.getElementById("tutupProfil");
-
-  // Pastikan elemen ada
-  if (!navAkun || !popupAkun) {
-    console.error("❌ Elemen navAkun atau popupAkun tidak ditemukan di halaman.");
-    return;
-  }
-
-  // === Saat klik navigasi akun ===
-  navAkun.addEventListener("click", function() {
-    popupAkun.style.display = "block"; // tampilkan popup
-
-    // Ambil data tersimpan di localStorage
-    document.getElementById("namaProfil").value = localStorage.getItem("namaProfil") || "";
-    document.getElementById("emailProfil").value = localStorage.getItem("emailProfil") || "";
-    document.getElementById("hpProfil").value = localStorage.getItem("hpProfil") || "";
-    document.getElementById("saldoProfil").value = localStorage.getItem("saldoProfil") || "";
-    document.getElementById("ewalletProfil").value = localStorage.getItem("ewalletProfil") || "";
-  });
-
-  // === Saat klik tombol simpan ===
-  simpanProfil.addEventListener("click", function() {
-    localStorage.setItem("namaProfil", document.getElementById("namaProfil").value);
-    localStorage.setItem("emailProfil", document.getElementById("emailProfil").value);
-    localStorage.setItem("hpProfil", document.getElementById("hpProfil").value);
-    localStorage.setItem("saldoProfil", document.getElementById("saldoProfil").value);
-    localStorage.setItem("ewalletProfil", document.getElementById("ewalletProfil").value);
-    alert("✅ Data profil berhasil disimpan.");
-  });
-
-  // === Saat klik tombol tutup ===
-  tutupProfil.addEventListener("click", function() {
-    popupAkun.style.display = "none";
-  });
-});
 
 
 </script>
