@@ -779,7 +779,6 @@ textarea {
 /* CLOSE BUTTON */
 .close-btn {
   position: absolute;
-  top: 120px;
   right: 20px;
   font-size: 20px;
   cursor: pointer;
@@ -877,20 +876,22 @@ textarea {
 
 
 
-
 /* Tombol Fitur */
 .features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 1 baris 4 */
+  gap: 16px;
   padding: 20px;
+  max-height: 200px; /* cukup utk 2 baris */
+  overflow: hidden;
 }
+
 .feature-item {
-  display: inline-block;
   text-align: center;
   cursor: pointer;
 }
-.feature-item img {
-  width: 50px;
-  height: 50px;
-}
+
+
 
 /* Popup Fullscreen */
 .popup-fullscreen {
@@ -1057,7 +1058,7 @@ textarea {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 300px;
+    width: 400px;
     text-align: left;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
   }
@@ -1082,10 +1083,81 @@ textarea {
   }
 
 
+.produk-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  margin-bottom: 14px;
+  border: 1px solid #eee;
+}
 
+/* Efek khusus promo */
+.produk-item.promo {
+  border: 2px solid #ff3b3b;
+  background: linear-gradient(135deg, #fff5f5, #ffffff);
+}
 
+/* Badge promo */
+.badge-promo {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff3b3b;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(255,59,59,0.4);
+}
 
+/* Gambar */
+.produk-item img {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+}
 
+/* Info */
+.produk-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.produk-info strong {
+  font-size: 15px;
+  color: #222;
+}
+
+.produk-info small {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Harga */
+.harga {
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.harga-asli {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.harga-promo {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff3b3b;
+}
 
   </style>
 </head>
@@ -1580,10 +1652,48 @@ g</div>
 
 
 <div class="features-grid">
+
   <div class="feature-item" onclick="openPopup()">
-    <img src="pasca.png" alt="Pulsa" width="50">
+    <img src="pasca.png" alt="Pulsa">
     <span>Pulsa</span>
   </div>
+
+  <div class="feature-item">
+    <img src="pasca2.png" alt="Pascabayar">
+    <span>Pascabayar</span>
+  </div>
+
+  <div class="feature-item">
+    <img src="paketdata.png" alt="Paket Data">
+    <span>Paket Data</span>
+  </div>
+
+  <div class="feature-item">
+    <img src="pln.png" alt="PLN">
+    <span>PLN</span>
+  </div>
+
+  <div class="feature-item">
+    <img src="pdam.png" alt="PDAM">
+    <span>PDAM</span>
+  </div>
+
+  <div class="feature-item">
+    <img src="tambahkartu.png" alt="E-Wallet">
+    <span>E-Wallet</span>
+  </div>
+
+  <div class="feature-item">
+    <img src="internet.png" alt="Internet">
+    <span>Internet</span>
+  </div>
+
+  <div class="feature-item">
+    <img src="tv.png" alt="TV">
+    <span>TV</span>
+  </div>
+<br><br><br><br>
+</div>
 
 
 <!-- Popup Fullscreen -->
@@ -1591,6 +1701,7 @@ g</div>
   <div class="popup-header">
     <span style="cursor:pointer" onclick="closePopup()">←</span> Pulsa
   </div>
+
   <div class="popup-content">
     <input type="text" id="nomorHP" class="input-box" placeholder="Nomor HP">
 
@@ -1599,56 +1710,133 @@ g</div>
       <option value="telkomsel">Telkomsel</option>
       <option value="axis">Axis</option>
       <option value="indosat">Indosat</option>
-      <option value="tri">Tri</option>
+      <option value="tri">iM3</option>
       <option value="smartfren">Smartfren</option>
     </select>
 
     <div class="section-title">Produk</div>
+
+<!-- DEFAULT PRODUK -->
+<div id="defaultProduk" class="produk-grid">
+
+
+
+
+<div class="produk-item promo">
+  <div class="badge-promo">PROMO 90%</div>
+
+  <img src="tekomsel.jpg">
+
+  <div class="produk-info">
+    <strong>Telkomsel</strong>
+    <small>Pulsa 200.000</small>
+
+    <div class="harga">
+      <span class="harga-asli">Rp 204.400</span>
+      <span class="harga-promo">Rp 36.200</span>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="produk-item">
+    <img src="exis.png">
+    <div class="produk-info">
+      <strong>Axis</strong>
+      <small>Pulsa 90.000</small>
+      <span>Rp 91.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="exis.png">
+    <div class="produk-info">
+      <strong>Axis</strong>
+      <small>Pulsa 31.000</small>
+      <span>Rp 31.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="tekomsel.jpg">
+    <div class="produk-info">
+      <strong>Telkomsel</strong>
+      <small>Pulsa 50.000</small>
+      <span>Rp 51.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="indosat.webp">
+    <div class="produk-info">
+      <strong>Indosat</strong>
+      <small>Pulsa 10.000</small>
+      <span>Rp 10.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="im3.webp">
+    <div class="produk-info">
+      <strong>IM3</strong>
+      <small>Pulsa 80.000</small>
+      <span>Rp 81.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="smart.webp">
+    <div class="produk-info">
+      <strong>Smartfren</strong>
+      <small>Pulsa 75.000</small>
+      <span>Rp 75.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="smart.webp">
+    <div class="produk-info">
+      <strong>Smartfren</strong>
+      <small>Pulsa 100.000</small>
+      <span>Rp 100.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="tekomsel.jpg">
+    <div class="produk-info">
+      <strong>Telkomsel</strong>
+      <small>Pulsa 150.000</small>
+      <span>Rp 150.000</span>
+    </div>
+  </div>
+
+  <div class="produk-item">
+    <img src="indosat.webp">
+    <div class="produk-info">
+      <strong>Indosat</strong>
+      <small>Pulsa 200.000</small>
+      <span>Rp 180.000</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- PRODUK DINAMIS (KATEGORI) -->
+<div id="productList" class="produk-grid" style="display:none;"></div>
+
+
+
     <div id="productList"></div>
-  </div> 
-  
+  </div>
 </div>
 
 <!-- Popup Setengah Layar -->
 <div id="popupDetail" class="popup-half">
   <div class="popup-half-header" id="detailTitle"></div>
-  <div id="detailPrice" style="margin-bottom: 15px;"></div>
+  <div id="detailPrice" style="margin-bottom:15px;"></div>
   <button onclick="closeDetail()">Beli Sekarang</button>
-</div>
-
-
-
-
-    <div class="feature-item">
-      <img src="pasca2.png" alt="Pascabayar">
-      <span>Pascabayar</span>
-    </div>
-    <div class="feature-item">
-      <img src="paketdata.png" alt="Paket Data">
-      <span>Paket Data</span>
-    </div>
-    <div class="feature-item">
-      <img src="pln.png" alt="PLN">
-      <span>PLN</span>
-    </div>
-    <div class="feature-item">
-      <img src="pdam.png" alt="PDAM">
-      <span>PDAM</span>
-    </div>
-    <div class="feature-item">
-      <img src="tambahkartu.png" alt="E-Wallet">
-      <span>E-Wallet</span>
-    </div>
-    <div class="feature-item">
-      <img src="internet.png" alt="Internet">
-      <span>Internet</span>
-    </div>
-    <div class="feature-item">
-      <img src="tv.png" alt="Lainnya">
-      <span>Tv</span>
-    </div>
-
-  </div><br><br><br><br>
 </div>
 
 
@@ -4327,28 +4515,6 @@ setInterval(() => {
 
 
 
-const products = {
-  telkomsel: [
-    { name: "Telkomsel 5.000", price: "Rp 6.000" },
-    { name: "Telkomsel 10.000", price: "Rp 11.500" }
-  ],
-  axis: [
-    { name: "AXIS 5.000", price: "Rp 5.950" },
-    { name: "AXIS 10.000", price: "Rp 10.935" }
-  ],
-  indosat: [
-    { name: "Indosat 5.000", price: "Rp 6.100" },
-    { name: "Indosat 10.000", price: "Rp 11.800" }
-  ],
-  tri: [
-    { name: "Tri 5.000", price: "Rp 5.900" },
-    { name: "Tri 10.000", price: "Rp 10.900" }
-  ],
-  smartfren: [
-    { name: "Smartfren 5.000", price: "Rp 6.050" },
-    { name: "Smartfren 10.000", price: "Rp 11.700" }
-  ]
-};
 
 function openPopup() {
   document.getElementById("popupPulsa").style.display = "block";
@@ -4554,6 +4720,122 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
+
+
+function openPopup() {
+  document.getElementById("popupPulsa").style.display = "block";
+}
+
+function closePopup() {
+  document.getElementById("popupPulsa").style.display = "none";
+}
+
+function closeDetail() {
+  document.getElementById("popupDetail").style.display = "none";
+}
+
+function loadProducts() {
+  const operator = document.getElementById("operatorSelect").value;
+  const list = document.getElementById("productList");
+
+  list.innerHTML = ""; // reset
+
+  if (!operator) return;
+
+
+
+
+
+  // DATA MANUAL (SIMULASI)
+  let data = {
+    telkomsel: [
+      { nama: "Telkomsel 10K", harga: "Rp 11.000" },
+      { nama: "Telkomsel 20K", harga: "Rp 21.000" }
+    ],
+    axis: [
+      { nama: "Axis 5K", harga: "Rp 6.000" },
+      { nama: "Axis 15K", harga: "Rp 16.000" }
+    ],
+    indosat: [
+      { nama: "Indosat 10K", harga: "Rp 11.500" }
+    ],
+    tri: [
+      { nama: "Tri 10K", harga: "Rp 10.800" }
+    ],
+    smartfren: [
+      { nama: "Smartfren 10K", harga: "Rp 11.200" }
+    ]
+  };
+
+  data[operator].forEach(item => {
+    const div = document.createElement("div");
+    div.className = "product-item";
+    div.innerHTML = `
+      <strong>${item.nama}</strong><br>
+      <small>${item.harga}</small>
+    `;
+    div.onclick = () => openDetail(item.nama, item.harga);
+    list.appendChild(div);
+  });
+}
+
+function openDetail(nama, harga) {
+  document.getElementById("detailTitle").innerText = nama;
+  document.getElementById("detailPrice").innerText = harga;
+  document.getElementById("popupDetail").style.display = "block";
+}
+
+
+
+
+
+
+
+
+
+
+function loadProducts() {
+  // sembunyikan default
+  document.getElementById("defaultProduk").style.display = "none";
+
+  // tampilkan list kategori
+  const list = document.getElementById("productList");
+  list.style.display = "grid";
+
+  // simulasi produk kategori
+  list.innerHTML = `
+    <div class="produk-item">
+      <img src="pasca.png">
+      <span>Pulsa 10.000</span>
+    </div>
+        <div class="produk-item">
+      <img src="pasca.png">
+      <span>Pulsa 50.000</span>
+    </div>
+        <div class="produk-item">
+      <img src="pasca.png">
+      <span>Pulsa 90.000</span>
+    </div>
+        <div class="produk-item">
+      <img src="pasca.png">
+      <span>Pulsa 200.000</span>
+    </div>
+        <div class="produk-item">
+      <img src="pasca.png">
+      <span>Pulsa 55.000</span>
+    </div>
+    <div class="produk-item">
+      <img src="pasca.png">
+      <span>Pulsa 25.000</span>
+    </div>
+    <div class="produk-item">
+      <img src="tekomsel.jpg">
+      <span>Pulsa 20.000</span>
+    </div>
+  `;
+}
 
 
 
