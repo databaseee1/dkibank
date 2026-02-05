@@ -1178,6 +1178,89 @@ textarea {
 }
 
 
+
+
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.popup-box h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #ff0404;
+}
+
+.popup-box p {
+  font-size: 14px;
+  color: #555;
+}
+
+.popup-box button {
+  margin-top: 14px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.popup-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 10px;
+}
+
+.popup-title-error {
+  color: #dc2626; /* merah */
+  font-weight: 600;
+}
+
+
+.icon-group {
+  align-items: center;
+  gap: 8px;
+}
+
+.info-icon {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: all 0.2s ease;
+}
+
+/* hover */
+.info-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* klik */
+.info-icon:active {
+  transform: scale(0.95);
+}
+
+
+
+
   </style>
 </head>
 <body>
@@ -1318,7 +1401,16 @@ textarea {
         <div style="flex:1; overflow:auto; padding-bottom:12px">
           <!-- Nama Bank (picker) -->
           <div class="form-row">
-            <label>Nama Bank / E-Wallet</label>
+            <div class="label-row">
+
+  <label>Nama Bank / E-Wallet</label>
+
+  <div class="icon-group">
+    <img src="star-inside-circle.png" class="info-icon" onclick="showPopup('gagal')" />
+    <img src="star-inside-circle.png" class="info-icon" onclick="showPopup('error')" />
+  </div>
+</div>
+
             <div class="fake-input" id="bankPicker" tabindex="0">
               <span id="bankLabel" style="color:#111">Pilih Bank atau E-Wallet</span>
               <span style="
@@ -1337,8 +1429,22 @@ textarea {
   cursor: pointer;
   box-sizing: border-box;
 ">▾</span>
+</div>
 
-            </div>
+
+
+
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-box">
+    <img id="popupIcon" src="" class="popup-icon" />
+    <h3 id="popupTitle"></h3>
+    <p id="popupMessage"></p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+
 
             <!-- picker panel -->
             <div class="picker" id="pickerPanel">
@@ -5046,6 +5152,47 @@ function loadProducts() {
     </div>
   `;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+function showPopup(type) {
+  const title = document.getElementById("popupTitle");
+  const message = document.getElementById("popupMessage");
+  const icon = document.getElementById("popupIcon");
+
+  // reset class
+  title.className = "";
+
+if (type === "gagal") {
+  title.innerText = "Transaksi Gagal!";
+  message.innerHTML = "Bank Tidak Ditemukan<br>Periksa Nomor Tujuan Anda";
+  icon.src = "eror.png"; // icon error besar
+  title.classList.add("popup-title-error");
+}
+
+  if (type === "error") {
+    title.innerText = "Transaksi Tertunda!";
+    message.innerText = "Transaksi belum dapat diproses karena sistem sedang dalam pemeliharaan.";
+    icon.src = "pasca.png"; // icon error besar
+    title.classList.add("popup-title-error");
+  }
+
+  document.getElementById("popupOverlay").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("popupOverlay").style.display = "none";
+}
+
 
 
 
