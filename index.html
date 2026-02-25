@@ -1646,7 +1646,7 @@ textarea {
                 </div>
                 <div class="line">
                   <span>Biaya Admin</span>
-                  <span id="r_fee">Rp 0</span>
+                  <span id="r_fee">Rp 2.500</span>
                 </div>
                 <div class="line">
                   <span>Catatan</span>
@@ -4857,7 +4857,7 @@ function generateReceipt() {
   r_tujuan_nama.textContent = nama;
   r_tujuan_acc.textContent = chosenBank + ' - ' + maskAccount(no);
   r_nominal.textContent = formatRupiah(nom);
-  r_fee.textContent = 'Rp 0';
+  r_fee.textContent = 'Rp 2.500';
   r_note.textContent = catatan.value.trim() ? catatan.value.trim() : '---';
 
   // show receipt
