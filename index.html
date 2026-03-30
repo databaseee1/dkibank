@@ -1430,6 +1430,7 @@ textarea {
   <div class="icon-group">
     <img src="star-inside-circle.png" class="info-icon" onclick="showPopup('gagal')" />
     <img src="star-inside-circle.png" class="info-icon" onclick="showPopup('error')" />
+    <img src="star-inside-circle.png" class="info-icon" onclick="showPopup('maintence')" />
   </div>
 </div>
 
@@ -5852,6 +5853,17 @@ if (type === "gagal") {
   icon.src = "eror.png"; // icon error besar
   title.classList.add("popup-title-error");
 }
+
+
+if (type === "maintence") {
+  title.innerText = "Sistem Maintenance";
+  message.innerHTML = "Sistem sedang dalam pemeliharaan.<br>Mohon maaf atas ketidaknyamanannya.";
+  icon.src = "eror.png"; // icon maintenance
+  title.classList.add("popup-title-maintence");
+}
+
+
+
 
   if (type === "error") {
     title.innerText = "Akun Kamu Terblokir!";
