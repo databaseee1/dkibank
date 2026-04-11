@@ -206,7 +206,7 @@ img {
       font-size: 12px;
     }
 
-    .navbar {
+.navbar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -215,10 +215,9 @@ img {
   border-top: 1px solid #ddd;
   display: flex;
   justify-content: space-around;
-  padding:0;
   padding-top: 12px;
-  z-index: 99;
-  
+  height: 70px; /* TAMBAH INI */
+  z-index: 1000;
 }
 
 .nav-item {
@@ -267,7 +266,7 @@ img {
   height: 70px;
   color: white;
   font-size: 12px;
-  z-index: 2;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -610,7 +609,7 @@ textarea {
 
 .receipt .line .label {
   flex: 1;
-  color: var(--muted);
+  color: #6b7b76;
 }
 
 .receipt .line .value {
@@ -1291,6 +1290,305 @@ textarea {
 
 
 
+/* popup full layar */
+.popup-akun {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0f172a;
+  display: none;
+  z-index: 9999;
+}
+
+/* isi popup */
+.popup-content {
+  padding: 20px;
+  color: white;
+}
+
+/* tombol back */
+.back-btn {
+  font-size: 20px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* info akun */
+.akun-info {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+
+/* background popup */
+.popup-akun {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0b1a2f;
+  display: none;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* animasi masuk */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* container */
+.popup-content {
+  padding: 20px;
+  color: #a10000;
+  font-family: sans-serif;
+}
+
+/* tombol back */
+.back-btn {
+  font-size: 22px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+/* judul */
+.popup-content h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* card profil */
+.akun-info {
+  margin-top: 25px;
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+/* isi teks */
+.akun-info p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* background popup */
+/* background utama */
+.popup-akun {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+    height: calc(100% - 75px); /* penting */
+
+  background: #f5f7fb;
+  display: none;
+  z-index: 9999;
+  font-family: sans-serif;
+}
+
+/* header biru */
+.header-akun {
+  background: linear-gradient(135deg, #bc0000, #ac0000);
+  padding: 40px 20px 20px; /* tetap ada */
+  
+  color: white;
+}
+
+/* tombol back */
+/* tombol back khusus akun */
+.back-akun {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 99999;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+}
+
+/* foto profil */
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  margin: 20px auto 10px;
+  border: 3px solid white;
+}
+
+/* nama */
+.profile-name {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* card info */
+.akun-card {
+  background: white;
+  margin: -10px 15px 0;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* isi info */
+.akun-card p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #7d7d7d;
+}
+
+/* label */
+.akun-card b {
+  color: #a20303;
+}
+
+
+
+.menu-akun {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 20px 15px;
+}
+
+/* item menu */
+.menu-akun-item {
+  background: white;
+  border-radius: 15px;
+  padding: 15px 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+/* hover efek */
+.menu-akun-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+
+/* icon */
+.menu-akun-item img {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 6px;
+}
+
+/* teks */
+.menu-akun-item span {
+  display: block;
+  font-size: 12px;
+  color: #333;
+}
+
+.menu-akun-item:active {
+  transform: scale(0.95);
+}
+
+
+
+/* container grid */
+.menu-ikan {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* item */
+.item-ikan {
+  background: linear-gradient(145deg, #00c6ff, #0072ff);
+  border-radius: 15px;
+  padding: 15px 8px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  transition: all 0.25s ease;
+}
+
+/* efek hover */
+.item-ikan:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* icon */
+.item-ikan .icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+/* teks */
+.item-ikan span {
+  font-size: 11px;
+  display: block;
+}
+
+/* efek gelembung */
+.item-ikan::before {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  top: -20px;
+  right: -20px;
+}
+
+/* efek gelombang bawah */
+.item-ikan::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50% 50% 0 0;
+}
+
+
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* label kiri */
+.label {
+  color: #666;
+}
+
+/* badge status */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* status aktif */
+.status.aktif {
+  background: #e6f9f0;
+  color: #00a86b;
+}
+
+
   </style>
 </head>
 <body>
@@ -1909,7 +2207,7 @@ g</div>
 <!-- Popup Fullscreen -->
 <div id="popupPulsa" class="popup-fullscreen">
   <div class="popup-header">
-    <span style="cursor:pointer" onclick="closePopup()">←</span> Pulsa
+<span style="cursor:pointer; position: relative; z-index: 9999;" onclick="goBack()">←</span> Pulsa
   </div>
 
   <div class="popup-content">
@@ -2066,7 +2364,7 @@ g</div>
 
 
 <!-- Popup Mutasi BRImo Style -->
-<div id="popupMutasi" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#f4f4f4; color:#222; z-index:9999; overflow-y:auto; font-family:sans-serif;">
+<div id="popupMutasi" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#f4f4f4; color:#222; z-index:999999; overflow-y:auto; font-family:sans-serif;">
   
   <!-- Header judul mutasi -->
   <div style="
@@ -5242,9 +5540,74 @@ style="filter: brightness(0) invert(1); width: 25px; height: 25px;">
 </div>
 
 <!-- 🔹 NAVIGASI AKUN -->
-<div class="nav-item" id="Navakunprofil_nav" style="cursor:pointer;">
-  <img src="account.png" class="gray-ichon" alt="Akun" style="width:30px; display:block; margin:0 auto;">
+<!-- MENU AKUN -->
+<div class="nav-item" id="Navakunprofil_nav" onclick="openAkun()" style="cursor:pointer;">
+  <img src="account.png" class="gray-ichon" style="width:30px; display:block; margin:0 auto;">
   <span style="display:block; text-align:center; font-size:14px;">Akun</span>
+</div>
+
+<!-- POPUP AKUN -->
+<div id="popupAkun" class="popup-akun">
+
+  <!-- HEADER -->
+  <div class="header-akun">
+    <span class="back-akun" onclick="closeAkun()">←</span>Kembali
+
+    <img src="cewek.jpeg" class="profile-avatar">
+    <div class="profile-name">IZUNA WINATTA</div>
+  </div>
+
+  <!-- CARD INFO -->
+  <div class="akun-card">
+    <p><b>Email:</b> izu*****e1@gmail.com</p>
+    <div class="status-row">
+  <span class="label">Status :</span>
+  <span class="status aktif">Aktif</span>
+</div>
+    <p><b>ID Akun:</b> 28***263</p>
+  </div>
+
+
+
+  <div class="menu-akun">
+
+  <div class="menu-akun-item">
+    <img src="pajak.png">
+    <span>Cek Pajak</span>
+  </div>
+
+  <div class="menu-akun-item">
+    <img src="maps.png">
+    <span>Maps</span>
+  </div>
+
+  <div class="menu-akun-item">
+    <img src="asuransi.png">
+    <span>Asuransi</span>
+  </div>
+
+  <div class="menu-akun-item">
+    <img src="jakcard.png">
+    <span>Jakcard</span>
+  </div>
+
+  <div class="menu-akun-item">
+    <img src="jakeri.png">
+    <span>Jakeri</span>
+  </div>
+
+  <div class="menu-akun-item">
+    <img src="pendidikan.png">
+    <span>Pendidikan</span>
+  </div>
+<div class="menu-ikan">
+
+
+
+
+</div>
+
+</div>
 </div>
 
 
@@ -5739,6 +6102,12 @@ function closePopup() {
   document.getElementById("popupPulsa").style.display = "none";
 }
 
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+
 function loadProducts() {
   const operator = document.getElementById("operatorSelect").value;
   const productList = document.getElementById("productList");
@@ -6137,6 +6506,34 @@ function closeScanner() {
     video._stream = null;
   }
 }
+
+
+
+function goBack() {
+  const popup = document.getElementById("popup");
+  if (popup) {
+    popup.style.display = "none";
+  } else {
+    history.back();
+  }
+}
+
+
+
+
+
+function openAkun() {
+  document.getElementById("popupAkun").style.display = "block";
+}
+
+function closeAkun() {
+  document.getElementById("popupAkun").style.display = "none";
+}
+
+document.querySelector(".akun-info").innerHTML = `
+  <p><b>Nama:</b> ${namaUser}</p>
+  <p><b>Email:</b> ${emailUser}</p>
+`;
 </script>
 
 
