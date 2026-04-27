@@ -1635,18 +1635,25 @@ textarea {
 <div class="user-info">
   <img src="cewek.jpeg" alt="User">
   <div class="user-name-section">
-<div id="ucapanWaktuDino" style="font-family: 5px; font-size: 15px;">Selamat datang!</div>
+<div id="ucapanWaktuDino" style="font-size:15px;">Selamat datang!</div>
 
     <div style="font-weight:bold;">IZUNA WINATTA</div>
   </div>
-<div style="position: relative; display: inline-block;">
-  <img src="bell.png" alt="Notifikasi" class="notif-icon" 
-    style="filter: brightness(0) invert(1); width: 20px; height: 20px; position: relative;">
+<div style="
+  position: absolute;
+  right: 30px;
+  top: 9%;
+  transform: translateY(-50%);
+  display: inline-block;
+">
   
+  <img src="bell.png" alt="Notifikasi" 
+    style="filter: brightness(0) invert(1); width: 20px; height: 20px;">
+
   <span style="
     position: absolute;
-    top: -2px;
-    right: -10px;
+    top: -4px;
+    right: -6px;
     background-color: red;
     color: white;
     font-size: 10px;
@@ -1654,6 +1661,7 @@ textarea {
     padding: 2px 5px;
     border-radius: 10px;
   ">+9</span>
+
 </div>
 </div>
 
@@ -2207,8 +2215,9 @@ g</div>
 <!-- Popup Fullscreen -->
 <div id="popupPulsa" class="popup-fullscreen">
   <div class="popup-header">
-<span style="cursor:pointer; position: relative; z-index: 9999;" onclick="goBack()">←</span> Pulsa
-  </div>
+<span style="cursor:pointer; position: relative; z-index: 9999;" onclick="goBackk()">←</span> Pulsa
+
+</div>
 
   <div class="popup-content">
     <input type="text" id="nomorHP" class="input-box" placeholder="Nomor HP">
@@ -6101,7 +6110,7 @@ function showBRImoNotif(success) {
   notif.innerHTML = `
     <div style="
       background:${success ? '#4CAF50' : '#F44336'};
-      color:white; padding:15px 20px; border-radius:8px;
+      color:white; padding:15px 30px; border-radius:8px;
       font-size:16px; font-weight:bold;
       box-shadow:0 2px 6px rgba(0,0,0,0.2);
       position:relative; 
@@ -6114,12 +6123,10 @@ function showBRImoNotif(success) {
            onclick="this.parentElement.parentElement.remove()">
 
       <!-- Jam realtime -->
-      <div id="notif-clock" style="font-size:10px; opacity:0.9;"></div>
-
       <!-- Baris gambar + teks -->
       <div style="display:flex; align-items:center; gap:10px;">
         <img src="${success ? 'donne.png' : 'erorwarning.png'}" 
-             style="width:30px; height:30px; background:white; padding:4px; border-radius:50%;">
+             style="width:30px; height:30px; background:white; padding:0px; border-radius:50%;">
         <span>${success ? 'Transfer Berhasil' : 'Transfer Gagal'}</span>
       </div>
     </div>
@@ -6136,7 +6143,6 @@ function showBRImoNotif(success) {
   function updateClock() {
     const now = new Date();
     const waktu = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    notif.querySelector('#notif-clock').textContent = waktu;
   }
   updateClock();
   setInterval(updateClock, 1000);
@@ -6457,16 +6463,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-function openPopup() {
-  document.getElementById("popupPulsa").style.display = "block";
-}
-
-function closePopup() {
+function goBackk() {
   document.getElementById("popupPulsa").style.display = "none";
-}
-
-function closeDetail() {
   document.getElementById("popupDetail").style.display = "none";
 }
 
@@ -6474,15 +6472,12 @@ function loadProducts() {
   const operator = document.getElementById("operatorSelect").value;
   const list = document.getElementById("productList");
 
-  list.innerHTML = ""; // reset
+  if (!list) return;
+
+  list.innerHTML = "";
 
   if (!operator) return;
 
-
-
-
-
-  // DATA MANUAL (SIMULASI)
   let data = {
     telkomsel: [
       { nama: "Telkomsel 10K", harga: "Rp 11.000" },
@@ -6503,6 +6498,8 @@ function loadProducts() {
     ]
   };
 
+  if (!data[operator]) return;
+
   data[operator].forEach(item => {
     const div = document.createElement("div");
     div.className = "product-item";
@@ -6520,10 +6517,6 @@ function openDetail(nama, harga) {
   document.getElementById("detailPrice").innerText = harga;
   document.getElementById("popupDetail").style.display = "block";
 }
-
-
-
-
 
 
 
@@ -6688,11 +6681,38 @@ document.querySelector(".akun-info").innerHTML = `
   <p><b>Nama:</b> ${namaUser}</p>
   <p><b>Email:</b> ${emailUser}</p>
 `;
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 
+<script>
+window.onload = function () {
+  const el = document.getElementById("ucapanWaktuDino");
 
+  const now = new Date();
+  const jam = now.getHours(); // langsung pakai jam lokal
 
+  let ucapan = "";
+
+  if (jam < 11) ucapan = "Selamat pagi ";
+  else if (jam < 15) ucapan = "Selamat siang ";
+  else if (jam < 18) ucapan = "Selamat sore ";
+  else ucapan = "Selamat malam ";
+
+  el.textContent = ucapan;
+};
+</script>
 
 
 </body>
